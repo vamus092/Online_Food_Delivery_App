@@ -1,0 +1,37 @@
+<div class="form-container">
+  <h2>Add Agent</h2>
+
+  <div *ngIf="showSuccess" class="alert-success">
+    Agent added successfully!
+  </div>
+
+  <form #agentForm="ngForm" (ngSubmit)="onSubmit(agentForm)" novalidate>
+    
+    <div class="form-group">
+      <label>Agent Name</label>
+      <input type="text" name="agentName" [(ngModel)]="agent.agentName" #agentName="ngModel" required minlength="2" maxlength="50">
+      <div *ngIf="agentName.invalid && (agentName.dirty || agentName.touched)" class="error">
+        <small *ngIf="agentName.errors?.['required']">Agent Name is required.</small>
+        <small *ngIf="agentName.errors?.['minlength']">Minimum 2 characters.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="text" name="phoneNumber" [(ngModel)]="agent.phoneNumber" #phoneNumber="ngModel" required pattern="^\d{10}$">
+      <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+        <small *ngIf="phoneNumber.errors?.['required']">Phone is required.</small>
+        <small *ngIf="phoneNumber.errors?.['pattern']">Must be a 10-digit number.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="checkbox" name="availability" [(ngModel)]="agent.availability">
+        Available for work
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="agentForm.invalid">Register Agent</button>
+  </form>
+</div>
