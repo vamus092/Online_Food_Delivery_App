@@ -1,0 +1,197 @@
+<div class="signup-wrapper">
+  <div class="bg-overlay"></div>
+
+  <div class="signup-card">
+    <div class="form-header">
+      <div class="brand-icon">🥗</div>
+      <h1>Join Lunch Box</h1>
+      <p>Create your account to start ordering</p>
+    </div>
+
+    <form class="form-box" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <!-- Full Name -->
+        <div class="input-group">
+          <label for="username">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            class="input-field"
+            formControlName="username"
+            placeholder="John Doe"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            class="input-field"
+            formControlName="email"
+            placeholder="john@example.com"
+          />
+          <div class="error" *ngIf="signupForm.get('email')?.errors?.['invalidEmail']">
+            <small>⚠️ Please enter a valid email</small>
+          </div>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="input-group">
+          <label for="dateofBirth">Date of Birth</label>
+          <input type="date" id="dateofBirth" class="input-field" formControlName="dateofBirth" />
+          <div class="error" *ngIf="signupForm.get('dateofBirth')?.errors?.['invalidDate']">
+            <small>⚠️ Not a valid date</small>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="input-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            class="input-field"
+            formControlName="phoneNumber"
+            placeholder="123-456-7890"
+          />
+          <div class="error" *ngIf="signupForm.get('phoneNumber')?.errors?.['invalidPhone']">
+            <small>⚠️ Phone must be Ten digits only</small>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="input-field"
+            formControlName="password"
+            placeholder="••••••••"
+          />
+          <div class="error" *ngIf="signupForm.get('password')?.errors?.['invalidPassword']">
+            <small>
+              Password must be at least 8 characters long and contain at least one uppercase letter,
+              one lowercase letter, one number, and one special character.
+            </small>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="input-field"
+            formControlName="confirmPassword"
+            placeholder="••••••••"
+          />
+          <div
+            class="error"
+            *ngIf="signupForm.get('confirmPassword')?.errors?.['invalidConfirmPassword']"
+          >
+            <small>Confirm password must be same Password </small>
+          </div>
+        </div>
+
+        <div formGroupName="address">
+          <div class="input-group full-width">
+            <label for="flatNo">Flat No</label>
+            <input
+              id="flatNo"
+              type="text"
+              class="input-field"
+              formControlName="flatNo"
+              placeholder="Flat No..."
+            />
+          </div>
+
+          <div class="input-group full-width">
+            <label for="landmark">Landmark</label>
+            <input
+              id="landmark"
+              class="input-field"
+              formControlName="landmark"
+              placeholder="Landmark..."
+            />
+          </div>
+
+          <div class="input-group full-width">
+            <label for="street">Street Name</label>
+            <input
+              id="street"
+              class="input-field"
+              formControlName="street"
+              placeholder="Street Name..."
+            />
+          </div>
+
+          <div class="input-group full-width">
+            <label for="city">City</label>
+            <input id="city" class="input-field" formControlName="city" placeholder="City..." />
+          </div>
+
+          <!-- UPDATED STATE FIELD -->
+          <div class="input-group full-width">
+            <label for="state">State</label>
+            <select id="state" class="input-field" formControlName="state" required>
+              <option value="" disabled selected>Select a State</option>
+              <option *ngFor="let s of states" [value]="s">{{ s }}</option>
+            </select>
+            <div class="error" *ngIf="signupForm.get('address.state')?.errors?.['required']">
+              <small>⚠️ State selection is required</small>
+            </div>
+          </div>
+
+          <div class="input-group full-width">
+            <label for="district">District</label>
+            <input
+              id="district"
+              class="input-field"
+              formControlName="district"
+              placeholder="District..."
+            />
+          </div>
+
+          <div class="input-group full-width">
+            <label for="zipCode">Zip Code</label>
+            <input
+              id="zipCode"
+              class="input-field"
+              formControlName="zipCode"
+              placeholder="Zip Code..."
+            />
+            <div
+              class="error"
+              *ngIf="signupForm.get('address.zipCode')?.errors?.['invalidZipCode']"
+            >
+              <small>Zip-Code is invalid .Only number is Allowed</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role -->
+        <div class="input-group">
+          <label for="role">Role</label>
+          <select id="role" class="input-field" formControlName="role">
+            <option value="" disabled selected>Select Role</option>
+            <option value="HOTEL-MANAGER">Hotel Manager</option>
+            <option value="ADMIN">Admin</option>
+            <option value="USER">User</option>
+          </select>
+          <div class="error" *ngIf="signupForm.get('role')?.errors?.['required']">
+            <small>⚠️ Role selection is required</small>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="signupForm.invalid" class="form-btn">Create Account</button>
+
+      <div class="login-footer">
+        <p>Already have an account? <a routerLink="/login">Sign In</a></p>
+      </div>
+    </form>
+  </div>
+</div>
