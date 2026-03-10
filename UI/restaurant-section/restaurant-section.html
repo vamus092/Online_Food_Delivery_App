@@ -1,0 +1,18 @@
+<div class="detail-container">
+  <header class="menu-header">
+    <!-- <button class="back-btn" routerLink="/home">← Back</button> -->
+    <h1>{{ restaurantName }}</h1>
+    <p>Explore our delicious categories</p>
+  </header>
+
+  <div class="menu-grid">
+    <div class="section-card" *ngFor="let section of menuSections">
+      <div class="section-overlay"></div>
+      <div class="section-content">
+        <span class="section-icon">{{ section.icon }}</span>
+        <h3>{{ section.title }}</h3>
+        <button class="view-items-btn" (click)="navigateToSection(restaurantId,section.title)">View Items</button>
+      </div>
+    </div>
+  </div>
+</div>
