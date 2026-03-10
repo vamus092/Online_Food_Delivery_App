@@ -1,0 +1,179 @@
+General Layout
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+ 
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: 600;
+}
+ 
+/* Filter Dropdown */
+label {
+  font-weight: 500;
+  margin-right: 10px;
+}
+ 
+#statusFilter {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+ 
+#statusFilter:hover {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+ 
+/* Table Styling */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+ 
+.orders-table th, .orders-table td {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 14px;
+}
+ 
+.orders-table thead {
+  background: #3498db;
+  color: #fff;
+  font-weight: 600;
+}
+ 
+.orders-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s ease;
+}
+ 
+.orders-table tbody tr:hover {
+  background: #f9f9f9;
+}
+ 
+/* Agent Dropdown */
+.orders-table select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+ 
+.orders-table select:hover {
+  border-color: #2ecc71;
+  box-shadow: 0 0 6px rgba(46, 204, 113, 0.3);
+}
+ 
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+ 
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #fff;
+  font-weight: 500;
+}
+ 
+.btn.accept {
+  background: #2ecc71;
+}
+ 
+.btn.cancel-refund {
+  background: #e67e22;
+}
+ 
+.btn.cancel {
+  background: #e74c3c;
+}
+ 
+.btn.reject {
+  background: #9b59b6;
+}
+ 
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+ 
+/* Status Highlighting */
+.orders-table td:nth-child(2) {
+  font-weight: 600;
+}
+ 
+.orders-table td:nth-child(2):contains("Pending") {
+  color: #f39c12;
+}
+ 
+.orders-table td:nth-child(2):contains("Delivered") {
+  color: #27ae60;
+}
+ 
+.orders-table td:nth-child(2):contains("Cancelled") {
+  color: #c0392b;
+}
+ 
+.orders-table td:nth-child(2):contains("Delayed") {
+  color: #d35400;
+}
+ 
+.orders-table td:nth-child(2):contains("Delivery in progress") {
+  color: #2980b9;
+}
+ 
+ 
+/* Standard Reject Button */
+.btn.reject {
+  background-color: #f44336; /* Your original red */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+ 
+/* Greyed out / Inactive state */
+/*  */
+ 
+ 
+.btn.btn-disabled{
+  background-color: #d3d3d3 !important; /* Neutral grey */
+  color: #888888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bcbcbc !important;
+  box-shadow: none !important;
+}
+ 
+.btn.reject:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+ 
+.btn-disabled{
+  background-color: #d3d3d3 !important; /* Neutral grey */
+  color: #888888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bcbcbc !important;
+  box-shadow: none !important;
+}
