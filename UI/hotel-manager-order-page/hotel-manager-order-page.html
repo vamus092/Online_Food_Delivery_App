@@ -1,0 +1,72 @@
+<div class="manager-container">
+  <h2>Hotel Manager Panel</h2>
+ 
+  <div class="controls">
+    <label for="statusFilter">Filter by Status:</label>
+    <select id="statusFilter" [(ngModel)]="selectedStatus" (change)="filterOrders()">
+      <option value="All">All</option>
+      <option value="Pending">Pending</option>
+      <option value="Delivery in progress">Delivery in Progress</option>
+      <option value="Delivered">Delivered</option>
+      <option value="Cancelled With refund">Cancelled With refund</option>
+    </select>
+  </div>
+ 
+  <table class="order-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Items</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Countdown / ETA</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of Orders">
+  <td>{{ order._id }}</td>
+  <td>
+    <ul>
+      <li *ngFor="let item of order.items">
+        {{ item.itemId?.itemName || 'Deleted Item' }} 
+        <small *ngIf="item.quantity"><br>Qunatity : {{ item.quantity }}</small>
+      </li>
+    </ul>
+  </td>
+  <td>{{ order.totalAmount }} Rs.</td>
+  <td [ngClass]="{'status-delivery': order.status === 'Delivery in progress'}">
+    {{ order.status }}
+  </td>
+
+  <td class="timer-display">
+    <strong>{{ displayTimers[order._id] || 'Calculating...' }}</strong>
+  </td>
+
+  <td>
+    <input
+      type="datetime-local"
+      [(ngModel)]="order.eta"
+      [disabled]="['Pending', 'Delivery in progress', 'Delivered', 'Cancelled With refund'].includes(order.status)"
+      [min]="todayDate + 'T00:00'"
+      [max]="todayDate + 'T23:59'"
+    />
+    
+    <button
+      class="action-btn start"
+      [disabled]="['Delivery in progress', 'Delivered', 'Cancelled With refund'].includes(order.status) || !order.eta"
+      (click)="handleSetDeliveryInProgress(order._id, order.eta || '', 'Delivery in progress')">
+        Start Delivery
+    </button>
+
+    <button
+      class="action-btn cancelled"
+      [disabled]="['Pending', 'Delivered', 'Cancelled With refund'].includes(order.status)"
+      (click)="handleCancelOrder(order._id,'Cancelled With refund')">
+        Cancel
+    </button>
+  </td>
+</tr>
+    </tbody>
+  </table>
+</div>
