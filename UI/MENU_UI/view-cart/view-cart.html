@@ -1,0 +1,26 @@
+<div class="cart-container" *ngIf="cartItems.length > 0; else emptyCart">
+  <h2>Your Cart</h2>
+  <div class="cart-items">
+    <div *ngFor="let item of cartItems" class="cart-card">
+      <h3>{{ item.itemName }}</h3>
+      <p>Price: ₹{{ item.price }}</p>
+      <p>Quantity: {{ item.quantity }}</p>
+      <button (click)="handleIncreaseQuantity(item._id)">+</button>
+      <button (click)="handleDecreaseQuantity(item._id)">-</button>
+      <button (click)="handleRemoveItem(item._id)" class="delete-btn">
+          Remove Item
+      </button>
+    </div>
+  </div>
+  <div class="cart-summary">
+    <h3>Total: ₹{{ total }}</h3>
+    <button *ngIf="currentUser" (click)=" placeOrder()" class="checkout-btn">Place Order</button>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <div class="empty-cart">
+    <i class="fas fa-shopping-cart"></i>
+    <p>Your cart is empty.</p>
+  </div>
+</ng-template>

@@ -1,0 +1,51 @@
+<h1 class="title">Edit Item</h1>
+
+<form #menuForm="ngForm" (ngSubmit)="update(menuForm)" class="menu-form">
+  <div class="menu-card">
+    <label for="name">Item-Name:</label>
+    <input
+      id="name"
+      [(ngModel)]="menu.itemName"
+      name="name"
+      placeholder="Enter Item-Name..."
+      required
+      class="input-field"
+      required
+      #name = "ngModel" 
+    />
+    <div class="error-msg" *ngIf="name.invalid && name.touched">Menu Name is required!</div>
+    <label for="description">Item-Description:</label>
+    <input
+      id="description"
+      [(ngModel)]="menu.description"
+      name="description"
+      placeholder="Enter Description..."
+      required
+      class="input-field"
+      #description = "ngModel" 
+
+    />
+    <div class="error-msg" *ngIf="description.invalid && description.touched">Item Description is required!</div>
+    <br><br>
+
+
+    <label for="price">Item-Price:</label>
+    <input
+      id="price"
+      [(ngModel)]="menu.price"
+      name="price"
+      type="number"
+      placeholder="Enter Price..."
+      required
+      min="1"
+      class="input-field"
+      #price="ngModel"
+      nonNegativePrice
+    />
+    <div class="error-msg" *ngIf="price.invalid && price.touched"  >Price is required!</div>
+    <div class="error-msg" *ngIf="menuForm.controls['price']?.errors?.['negativeValue']">Price should be greater than 10!</div>
+    <br><br>
+
+    <button type="submit" [disabled]="menuForm.invalid" class="btn-update">Update</button>
+  </div>
+</form>
