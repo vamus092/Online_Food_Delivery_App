@@ -1,0 +1,137 @@
+/* Cart container */
+.cart-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cart-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Cart items grid */
+.cart-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* Individual cart card */
+.cart-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.cart-card h3 {
+  margin: 0 0 10px;
+  color: #4CAF50;
+}
+
+.cart-card p {
+  margin: 6px 0;
+  color: #555;
+}
+
+/* Quantity buttons */
+.cart-card button {
+  margin: 4px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.cart-card button:first-of-type {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.cart-card button:first-of-type:hover {
+  background-color: #388E3C;
+}
+
+.cart-card button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+.cart-card button:last-of-type:hover {
+  background-color: #d32f2f;
+}
+
+/* Cart summary */
+.cart-summary {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.cart-summary h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* Checkout button */
+.checkout-btn {
+  background-color: #2196f3;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #1976d2;
+}
+
+.empty-cart {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px;
+  color: #777;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.empty-cart i {
+  font-size: 60px;
+  color:#4CAF50;
+  margin-bottom: 15px;
+  display: block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.empty-cart i:hover {
+  transform: scale(1.1);
+  color: #4CAF50; /* turns green on hover */
+}
+
+.empty-cart p {
+  color:#555;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
