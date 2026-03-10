@@ -1,0 +1,126 @@
+/* --- Payment Page Container --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.payment-container {
+  font-family: 'Inter', sans-serif;
+  max-width: 450px;
+  margin: 50px auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+}
+
+h2 {
+  text-align: center;
+  color: #1e293b;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+/* --- Total Amount Section --- */
+.total-section {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 30px;
+  border: 1px dashed #cbd5e1;
+}
+
+.total-section h3 {
+  margin: 0;
+  color: #6366f1; /* Brand Indigo */
+  font-size: 1.25rem;
+}
+
+/* --- Form Layout --- */
+.payment-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+  margin-top: 15px;
+}
+
+/* --- Input Fields --- */
+input {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #1e293b;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* --- Error Messages --- */
+.error {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.error::before {
+  content: '⚠️';
+  margin-right: 4px;
+}
+
+/* --- Pay Now Button --- */
+button[type="submit"] {
+  margin-top: 30px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+}
+
+button[type="submit"]:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* --- Disabled State (Stay visible but look gray) --- */
+button[type="submit"]:disabled {
+  background: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* --- Extra Polish --- */
+#expiry {
+  cursor: pointer;
+}
