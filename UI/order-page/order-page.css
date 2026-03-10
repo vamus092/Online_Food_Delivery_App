@@ -1,0 +1,130 @@
+/* --- Container & Typography --- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.order-container {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: #1a202c;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #111827;
+  border-left: 5px solid #6366f1;
+  padding-left: 15px;
+}
+
+/* --- Table Styling --- */
+.order-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.order-table th {
+  background-color: #f9fafb;
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.order-table td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.order-table tr:last-child td {
+  border-bottom: none;
+}
+
+.order-table tr:hover {
+  background-color: #f8fafc;
+}
+
+/* --- Item List Inside Table --- */
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-list li {
+  display: inline-block;
+  background: #edf2f7;
+  color: #4a5568;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin: 2px;
+  font-weight: 500;
+}
+
+/* --- Status Badges --- */
+.status-badge {
+  padding: 0.4rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-block;
+  text-align: center;
+  min-width: 80px;
+  text-transform: capitalize;
+}
+
+/* Logic for [ngClass] lowercased colors */
+.status-badge.pending { background-color: #fef3c7; color: #92400e; }
+.status-badge.delivered { background-color: #d1fae5; color: #065f46; }
+.status-badge.cancelled { background-color: #fee2e2; color: #991b1b; }
+.status-badge.processing { background-color: #e0e7ff; color: #3730a3; }
+/* Default for "Delivery in progress" or others */
+.status-badge.delivery { background-color: #e0f2fe; color: #075985; }
+
+/* --- Agent Info Styling --- */
+td:nth-child(5), td:nth-child(6) {
+  color: #718096;
+  font-size: 0.85rem;
+}
+
+/* --- Empty State (No Orders) --- */
+.no-orders-container {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 2px dashed #e2e8f0;
+  margin-top: 1rem;
+}
+
+.no-orders-message {
+  font-size: 1.25rem;
+  color: #718096;
+  margin-bottom: 1rem;
+}
+
+.no-orders-icon {
+  font-size: 3rem;
+  color: #cbd5e1;
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 768px) {
+  .order-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
