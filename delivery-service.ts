@@ -26,26 +26,4 @@ assignDeliveryAgent(orderId:string,agentId:string,status:string):Observable<any>
     return this.http.post(`http://localhost:8000/admin/${orderId}/${agentId}`,{status},{ withCredentials: true })
 }
 
-   //get all agents
-//   getAgents(): DeliveryAgent[] {
-//     return this.dummyAgents;
-   
-//   }
- 
-//  //order accept mark agent as unavailable
-//   setAgentAvailability(agentId: number | undefined, isAvailable: boolean): void {
-//     const agent = this.dummyAgents.find(a => a.id === agentId);
-//     if (agent) {
-//       agent.available = isAvailable;
-//     }
-//   }
-
-//   getAnyAvailableAgent(): DeliveryAgent[] {  
-//     return this.dummyAgents.filter(agent => agent.available);//avialable agent n array 
-//   }
- 
   
-//   anyAgentsAvailable(): boolean {
-//     return this.dummyAgents.some(agent => agent.available);
-//   }
-}
