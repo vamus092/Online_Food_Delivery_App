@@ -4,7 +4,7 @@ import { DeliveryService } from '../services/delivery-service';
 import { OrderService } from '../services/order-service';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
-describe('AdminPage Two Test Cases', () => {//define test suite
+describe('AdminPage Two Test Cases', () => {
   let component: AdminPage;
   let fixture: ComponentFixture<AdminPage>;
   let deliveryServiceMock: any;
@@ -20,7 +20,7 @@ describe('AdminPage Two Test Cases', () => {//define test suite
       setAgentAvailability: vi.fn(),
     };
     orderServiceMock = {
-      getOrders: vi.fn().mockReturnValue([]),//vi.fn() to create spies
+      getOrders: vi.fn().mockReturnValue([]),
       updateAgent: vi.fn(),
       updateOrderStatus: vi.fn(),
     };
@@ -42,15 +42,14 @@ describe('AdminPage Two Test Cases', () => {//define test suite
 
   //  POSITIVE TEST CASE 
   it('Positive: handleAccept should assign agent and update status when an agent is selected', () => {
-    // Arrange: Set up the scenario where an agent is selected
+  
     const orderId = '101';
     const mockAgent = { id: 91, name: 'Agent Smith', available: true };
     component.selectedAgentsMap[orderId] = mockAgent;
 
-    // Act: Call the function
+
     component.handleAccept(orderId);
 
-    // Assert: Verify success actions happened
     expect(deliveryServiceMock.setAgentAvailability).toHaveBeenCalledWith(91, false);
     expect(orderServiceMock.updateOrderStatus).toHaveBeenCalledWith(orderId, 'Accepted');
     expect(window.alert).toHaveBeenCalled(); // Alert was shown
@@ -59,16 +58,16 @@ describe('AdminPage Two Test Cases', () => {//define test suite
 
   // NEGATIVE TEST CASE 
   it('Negative: handleAccept should NOT call any services if no agent is selected', () => {
-    // Arrange: Set up the scenario where the dropdown is empty (null/undefined)
+    
     const orderId = '102';
     component.selectedAgentsMap[orderId] = null;
 
-    // Act: Call the function
     component.handleAccept(orderId);
 
-    // Assert: Verify NO actions happened
+   
     expect(deliveryServiceMock.setAgentAvailability).not.toHaveBeenCalled();
     expect(orderServiceMock.updateOrderStatus).not.toHaveBeenCalled();
     expect(window.alert).not.toHaveBeenCalled();
   });
+
 });
