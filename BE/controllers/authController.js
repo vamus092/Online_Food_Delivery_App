@@ -44,7 +44,7 @@ exports.createUser = async (req, res,next) => {
             return res.status(201).json(new ApiResponse("User added Successfully...",newUser,201));
         }
         catch (err) {
-            // return res.status(500).json(new ApiError(""));
+          
             next(err);
         }
     }
@@ -69,17 +69,14 @@ exports.loginHandler = async (req, res) => {
                     if (result) {
                         let token = generateAccessToken(user);
                         let refreshToken = generateRefreshToken(user);
-                        // console.log("Access Token:", token);
-                        // console.log("Refresh Token:", refreshToken);
+                    
                         res.cookie("token", token, {
-                            // httpOnly: true,
-                            // secure: true,
+                           
                             sameSite: "Strict",
                             maxAge: 40 * 60 * 1000
                         });
                         res.cookie("refreshToken", refreshToken, {
-                            // httpOnly: true,
-                            // secure: true,
+                            
                             sameSite: "Strict",
                             maxAge: 24 * 60 * 60 * 1000
                         });
@@ -164,5 +161,6 @@ exports.getProfileHandler = async (req ,res) => {
     res.status(401).json({ message: 'Invalid or expired token' });
   }
 };
+
 
 
