@@ -73,16 +73,7 @@ export class AdminPage implements OnInit {
 
     }
 
-    loadData() {//populate agents and orders arrays by calling service 
-        // this.agents = this.deliveryService.getAnyAvailableAgent();
-        //this.Orders = this.orderService.getOrders();
-    }
 
-
-
-
-    //get isAnyAgentAvailable(): boolean {
-    //return this.deliveryService.anyAgentsAvailable();
 
 
 
@@ -92,11 +83,11 @@ export class AdminPage implements OnInit {
         console.log(agent);
         console.log(agent._id);
         if (agent) {
-            //this.deliveryService.setAgentAvailability(agent.id, false);
+          
             this.deliveryService.assignDeliveryAgent(orderId, agent._id, status).subscribe({
                 next: (response) => {
                     console.log("Delivery Status Changed Successfully ....", response);
-                    //this.agentName = response.data.agentAssigned.agentName;
+                   
                     alert(`Order ${orderId} accepted and assigned to ${response.data.agentAssigned.agentName}.`);
                     this.cdr.detectChanges();
                 },
@@ -144,3 +135,4 @@ export class AdminPage implements OnInit {
     }
     
 }
+
