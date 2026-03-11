@@ -75,10 +75,10 @@ export class PaymentPage {
     next: (response) => {
       console.log("Order created successfully:", response);
 
-      // Show success alert
+    
       alert(`Payment of ₹${this.totalAmount} successful! 🎉`);
 
-      // Generate receipt data
+    
       
 
     this.orderService.initiatePayment(response.order._id,'Paid').subscribe({
@@ -90,10 +90,10 @@ export class PaymentPage {
         }
     })
 
-      // Clear cart
+    
       this.viewCartService.clearCart();
 
-      // Navigate to receipt page
+      
       this.router.navigate(['/order-page']);
     },
     error: (err) => {
@@ -108,3 +108,4 @@ export class PaymentPage {
      this.viewSubscription.unsubscribe();
    }
 }
+
