@@ -1,4 +1,4 @@
-// MUST BE AT THE TOP
+
 jest.mock('uuid', () => ({ v4: () => 'mocked-uuid-1234' }));
 
 const { createUser, loginHandler } = require('../controllers/authController');
@@ -6,7 +6,7 @@ const { User } = require('../models/userModel');
 const { Addresses } = require('../models/addressModel');
 const bcrypt = require('bcrypt');
 
-// Mock other dependencies
+
 jest.mock('../models/userModel');
 jest.mock('../models/addressModel');
 jest.mock('../utils/authService');
@@ -55,7 +55,7 @@ describe('Auth Controller Unit Tests', () => {
                 select: jest.fn().mockResolvedValue(mockUser)
             });
 
-            // Mock the callback-based bcrypt.compare
+            
             bcrypt.compare.mockImplementation((pw, hash, cb) => cb(null, true));
 
             await loginHandler(req, res);
@@ -63,4 +63,5 @@ describe('Auth Controller Unit Tests', () => {
             expect(res.status).toHaveBeenCalledWith(200);
         });
     });
+
 });
