@@ -1,8 +1,8 @@
-const { createAgent, assignAgent } = require('../controllers/adminController'); // Adjust path as needed
+const { createAgent, assignAgent } = require('../controllers/adminController'); 
 const Agent = require('../models/agentSchema');
 const Order = require('../models/orderModel');
 
-// 1. Mock the models
+
 jest.mock('../models/agentSchema');
 jest.mock('../models/orderModel');
 
@@ -35,7 +35,7 @@ describe('Admin Controller Unit Tests', () => {
         });
     });
 
-    // TEST CASE 2: assignAgent (Successful Case)
+    // TEST CASE 2: assignAgent
     describe('assignAgent', () => {
         it('should assign an available agent to an order', async () => {
             req = {
@@ -43,13 +43,13 @@ describe('Admin Controller Unit Tests', () => {
                 body: { status: 'Assigned' }
             };
 
-            // 1. Mock finding the agent (Available)
+        
             Agent.findById.mockResolvedValue({ _id: 'agent123', availability: true });
             
-            // 2. Mock finding the order
+            
             Order.findById.mockResolvedValue({ _id: 'order456' });
 
-            // 3. Mock the updates (using .populate chain for Order)
+            
             Order.findOneAndUpdate.mockReturnValue({
                 populate: jest.fn().mockResolvedValue({ _id: 'order456', status: 'Assigned' })
             });
@@ -65,3 +65,4 @@ describe('Admin Controller Unit Tests', () => {
     });
 
 });
+
