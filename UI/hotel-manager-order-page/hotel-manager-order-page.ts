@@ -47,12 +47,12 @@ export class HotelManagerOrderPage implements OnInit, OnDestroy {
                         next: (response: any) => {
                             console.log('All Orders fetched successfully:', response);
                             this.Orders = response.data;
-                            // Map each order and add displayTimer
+                            
                             this.Orders = response.data.map((order: Order) => ({
                                 ...order,
                                 displayTimer: this.calculateTimer(order)
                             }));
-                            // Start the recurring timer loop
+                            
                             this.startTimer();
                             console.log('Orders in Hotel Manager component:', this.Orders);
                             this.cdr.detectChanges();
@@ -91,7 +91,7 @@ export class HotelManagerOrderPage implements OnInit, OnDestroy {
         }, 8000); // smoother countdown
     }
 
-    /** Calculate timer string for a single order */
+    
     private calculateTimer(order: Order): string {
         const now = new Date().getTime();
 
@@ -109,7 +109,7 @@ export class HotelManagerOrderPage implements OnInit, OnDestroy {
         }
     }
 
-    /** Fetch orders and attach displayTimer */
+    
     updateLiveTimers() {
         const now = new Date().getTime();
         this.loadOrders();
@@ -143,8 +143,7 @@ export class HotelManagerOrderPage implements OnInit, OnDestroy {
                 // Update local Orders array
                 this.Orders = response.data;
 
-                // Angular will now re-render automatically
-                // If using OnPush change detection, you can force it:
+            
                 this.cdr.detectChanges();
             },
             error: (error: any) => {
@@ -200,3 +199,4 @@ export class HotelManagerOrderPage implements OnInit, OnDestroy {
         if (this.timerInterval) clearInterval(this.timerInterval);
     }
 }
+
