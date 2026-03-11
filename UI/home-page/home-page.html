@@ -1,0 +1,71 @@
+<section class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Your Favorite Food,<br />Delivered Fast.</h1>
+    <p>Explore top-rated restaurants in your district and satisfy your cravings.</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2 class="section-title">Popular Near You</h2>
+
+  <div class="restaurants-container">
+    <div
+      *ngFor="let restaurant of paginatedRestaurants"
+      class="restaurant-card"
+      (click)="onRestaurantClick(restaurant.restaurantName, restaurant._id)"
+      style="cursor: pointer"
+    >
+      <div class="card-image-wrapper">
+        <span class="status-badge" [class.closed]="!restaurant.isOperating">
+          {{ restaurant.isOperating ? 'Open Now' : 'Currently Closed' }}
+        </span>
+      </div>
+
+      <div class="card-info">
+        <h3 class="restaurant-name">{{ restaurant.restaurantName }}</h3>
+
+        <div class="info-row">
+          <span class="icon">📍</span>
+          <p>
+            {{ restaurant.address.landmark }}, {{ restaurant.address.district }},
+            {{ restaurant.address.state }}
+          </p>
+        </div>
+
+        <div class="info-row">
+          <span class="icon">🕒</span>
+          <p>{{ restaurant.openingHours.open }} - {{ restaurant.openingHours.close }}</p>
+        </div>
+
+        <div class="info-row">
+          <span class="icon">📞</span>
+          <p>{{ restaurant.contactNumber }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button class="page-btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+      &larr; Prev
+    </button>
+
+    <button
+      class="page-btn num-btn"
+      *ngFor="let page of pagesArray"
+      (click)="goToPage(page)"
+      [class.active]="currentPage === page"
+    >
+      {{ page }}
+    </button>
+
+    <button
+      class="page-btn"
+      (click)="goToPage(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+    >
+      Next &rarr;
+    </button>
+  </div>
+</section>

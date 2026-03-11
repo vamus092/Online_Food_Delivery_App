@@ -1,0 +1,50 @@
+<div class="login-wrapper">
+  <div class="bg-overlay"></div>
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="brand-icon">🍱</div>
+      <h1>Lunch Box</h1>
+      <p class="subtitle">Welcome Back! Sign in to continue</p>
+    </div>
+
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="login-form">
+      
+      <div class="form-group">
+        <label>Email Address</label>
+        <div class="input-container">
+          <input type="email" name="email" ngModel placeholder="name@example.com" required email>
+          <span class="focus-border"></span>
+        </div>
+        <div class="error-box" *ngIf="myForm.controls['email']?.touched && myForm.controls['email']?.invalid">
+          <small>Please enter a valid email address</small>
+        </div>
+        <div class="error-box" *ngIf="myForm.controls['email']?.errors?.['invalidEmail']">
+          <small>Please enter a valid email address</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-container">
+          <input type="password" name="password" ngModel placeholder="••••••••" required password-check>
+          <span class="focus-border"></span>
+        </div>
+        <div class="error-box" *ngIf="myForm.controls['password']?.errors?.['invalidPassword']">
+          <small>Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.</small>
+        </div>
+      </div>
+
+  
+      <button type="submit" class="btn-submit" [disabled]="myForm.invalid">
+        Sign In
+      </button>
+    </form>
+
+    <div class="signup-link">
+      <p>Don't have an account? 
+        <a (click)="redirectToSignup()" routerLink="/signup">Create Account</a>
+      </p>
+    </div>
+  </div>
+</div>

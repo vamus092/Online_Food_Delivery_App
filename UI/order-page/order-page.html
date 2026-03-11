@@ -1,0 +1,41 @@
+<div class="order-container">
+  <h2>My Orders</h2>
+  <table class="order-table" *ngIf="orderdItems && orderdItems.length > 0; else noOrders">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Items</th>
+        <th>Total Price</th>
+        <th>Status</th>
+        <th>Agent-ID</th>
+        <th>Agent-Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orderdItems">
+        <td>{{ order._id }}</td>
+        <td>
+          <ul class="item-list">
+            <li *ngFor="let item of order.items">{{ item.itemId.itemName || 'N/A'}}</li>
+          </ul>
+        </td>
+        <td>{{ order.totalAmount }} Rs.</td>
+        <td>
+          <span class="status-badge" [ngClass]="order.status.toLowerCase()">
+            {{ order.status }}
+          </span>
+        </td>
+        <td>{{ order.agentAssigned ? order.agentAssigned._id : 'N/A' }}</td>
+        <td>{{ order.agentAssigned ? order.agentAssigned.agentName : 'N/A' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noOrders>
+  <div class="no-orders-container">
+    <p class="no-orders-message">You have no orders placed yet.</p>
+    <i class="fa fa-shopping-cart no-orders-icon"></i>
+  </div>
+</ng-template>
+
+

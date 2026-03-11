@@ -1,0 +1,166 @@
+/* General container styling */
+.manager-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9f9fb;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.manager-container h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Controls section */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.controls label {
+  font-weight: 500;
+  margin-right: 10px;
+  color: #444;
+}
+
+.controls select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.controls select:hover {
+  border-color: #0078d7;
+}
+
+.clear-btn {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.clear-btn:hover {
+  background: #e63939;
+}
+
+/* Table styling */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.order-table thead {
+  background: #0078d7;
+  color: #fff;
+}
+
+.order-table th, .order-table td {
+  padding: 14px 16px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.order-table th {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.order-table tbody tr:hover {
+  background: #f1f7ff;
+  transition: background 0.3s ease;
+}
+
+/* Items list */
+.order-table ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-table li {
+  text-align: left;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Status styling */
+.status-delivery {
+  color: #0078d7;
+  font-weight: 600;
+}
+
+/* Timer display */
+.timer-display strong {
+  font-size: 15px;
+  color: #222;
+}
+
+/* Input styling */
+input[type="datetime-local"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  transition: border 0.3s ease;
+}
+
+input[type="datetime-local"]:focus {
+  border-color: #0078d7;
+  outline: none;
+}
+
+/* Action buttons */
+.action-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 4px;
+  transition: all 0.3s ease;
+}
+
+.action-btn.start {
+  background: #28a745;
+  color: #fff;
+}
+
+.action-btn.start:hover {
+  background: #218838;
+}
+
+.action-btn.cancelled {
+  background: #dc3545;
+  color: #fff;
+}
+
+.action-btn.cancelled:hover {
+  background: #c82333;
+}
+
+.action-btn:disabled {
+  background: #ccc !important;
+  cursor: not-allowed;
+  color: #666 !important;
+}

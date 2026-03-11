@@ -1,0 +1,147 @@
+/* Container Background */
+.create-menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #f4f7f6;
+  min-height: calc(100vh - 150px);
+}
+
+/* Form Card */
+.form-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 650px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.form-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.header-icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-title {
+  font-size: 1.8rem;
+  color: #2d3436;
+  font-weight: 800;
+  margin: 0;
+}
+
+.form-header p {
+  color: #747d8c;
+  margin-top: 5px;
+  font-size: 0.95rem;
+}
+
+/* Layout Helpers */
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Inputs & Labels */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d3436;
+  margin-bottom: 8px;
+}
+
+.input-wrapper input, 
+.input-wrapper textarea, 
+.input-wrapper select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #edeff2;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fafbfc;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.input-wrapper textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.input-wrapper input:focus, 
+.input-wrapper textarea:focus, 
+.input-wrapper select:focus {
+  outline: none;
+  border-color: #ff4757;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.1);
+}
+
+/* Error Messages */
+.error-msg {
+  color: #eb4d4b;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+/* Submit Button */
+.form-actions {
+  margin-top: 30px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: #2d3436; /* Dark professional background */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #ff4757; /* Switches to brand color on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+}
+
+.btn-submit:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .form-card {
+    padding: 25px;
+  }
+}

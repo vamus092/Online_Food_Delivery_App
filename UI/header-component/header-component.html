@@ -1,0 +1,64 @@
+<div class="app-container">
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand" routerLink="/">
+        <span class="logo-icon">🍱</span> 
+        <span class="logo-text">FlavorHub</span>
+      </div>
+
+      <div class="navbar-links">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        
+        <ng-container *ngIf="currentUser">
+          <a routerLink="/create-menu" *ngIf="currentUser.role === 'HOTEL-MANAGER'" routerLinkActive="active">Create Menu</a>
+          <a routerLink="/view-cart" *ngIf="currentUser.role === 'USER'" routerLinkActive="active" class="cart-link">
+            View Cart 🛒
+          </a>
+          <a routerLink="/order-page" *ngIf="currentUser.role === 'USER'" routerLinkActive="active">Order Track</a>
+          <a routerLink="/hotel-manager-order-page" *ngIf="currentUser.role === 'HOTEL-MANAGER'" routerLinkActive="active">Manage Orders</a>
+          <a routerLink="/admin-page" *ngIf="currentUser.role === 'ADMIN'" routerLinkActive="active">Admin Order-Track</a>
+          <a routerLink="/add-restaurant" *ngIf="currentUser.role === 'HOTEL-MANAGER'" routerLinkActive="active">Add Restaurant</a>
+          <a routerLink="/add-agent" *ngIf="currentUser.role === 'ADMIN'" routerLinkActive="active">Add Agent</a>
+        </ng-container>
+
+        <a routerLink="/login" routerLinkActive="active" *ngIf="!currentUser" class="login-btn">Login</a>
+      </div>
+
+      <div class="user-dropdown" *ngIf="currentUser">
+        <button class="dropdown-toggle" (click)="toggleDropdown()">
+          <span class="user-avatar">👤</span>
+          <span class="user-name">Hi, {{ currentUser.username }}</span>
+          <span class="arrow" [class.open]="isDropdownOpen">▾</span>
+        </button>
+        
+        <div class="dropdown-menu" *ngIf="isDropdownOpen">
+          <a *ngIf="currentUser.role === 'USER'" routerLink="/edit">Profile Settings</a>
+          <hr />
+          <a (click)="Logout()" class="logout-link">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <!-- Child routes will render here -->
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>🍱 Lunch Box</h3>
+        <p>Deliciousness delivered to your desk.</p>
+      </div>
+      <div class="footer-links">
+        <div class="social-icons">
+          <a href="#" class="social-tag">Facebook</a>
+          <a href="#" class="social-tag">Twitter</a>
+          <a href="#" class="social-tag">Instagram</a>
+        </div>
+        <p class="copyright">© 2026 Lunch Box. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>

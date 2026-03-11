@@ -1,0 +1,178 @@
+/* Layout Strategy */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1; /* Pushes footer to bottom */
+}
+
+/* Navbar Styling */
+.navbar {
+  background: #ffffff;
+  padding: 0.8rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2d3436;
+  letter-spacing: -0.5px;
+}
+
+/* Links */
+.navbar-links {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #636e72;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover, .navbar-links a.active {
+  color: #ff4757; /* Primary Brand Color */
+  
+}
+
+/* .login-btn {
+  background-color: aqua;
+  color: white !important;
+  padding: 8px 20px;
+  border-radius: 20px;
+} */
+
+/* Dropdown Customization */
+.user-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background: #f1f2f6;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: white;
+  min-width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dropdown-menu a {
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #2d3436;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.dropdown-menu a:hover {
+  background: #f8f9fa;
+  color: #ff4757;
+}
+
+.logout-link {
+  color: #ff4757 !important;
+  font-weight: bold;
+}
+
+/* Footer Styling */
+.footer {
+  background: #2d3436;
+  color: #dfe6e9;
+  padding: 40px 20px 20px;
+  margin-top: 50px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.social-tag {
+  color: white;
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 5px 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+
+.social-tag:hover {
+  background: #ff4757;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.active {
+  font-weight: bold;
+  color: #ffffff; /* Angular blue */
+  text-decoration: underline;
+  background-color: #000000;
+  font-size:1rem;
+  border-radius: 14px;
+  width:100px;
+  text-align:center;
+  padding: 10px 15px;;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .navbar-links { display: none; } /* Consider adding a hamburger menu later */
+  .footer-container { flex-direction: column; text-align: center; }
+}
