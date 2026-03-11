@@ -73,16 +73,7 @@ export class AdminPage implements OnInit {
 
     }
 
-    loadData() {//populate agents and orders arrays by calling service 
-        // this.agents = this.deliveryService.getAnyAvailableAgent();
-        //this.Orders = this.orderService.getOrders();
-    }
-
-
-
-
-    //get isAnyAgentAvailable(): boolean {
-    //return this.deliveryService.anyAgentsAvailable();
+    
 
 
 
@@ -144,3 +135,4 @@ export class AdminPage implements OnInit {
     }
     
 }
+
