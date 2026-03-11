@@ -18,7 +18,7 @@ describe('Admin Controller Unit Tests', () => {
         jest.clearAllMocks();
     });
 
-    // TEST CASE 1: createAgent
+ 
     describe('createAgent', () => {
         it('should create an agent and return 201 status', async () => {
             req = { body: { name: 'Agent Smith', vehicle: 'Bike' } };
@@ -63,4 +63,5 @@ describe('Admin Controller Unit Tests', () => {
             );
         });
     });
+
 });
