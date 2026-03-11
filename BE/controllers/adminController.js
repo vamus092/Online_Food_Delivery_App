@@ -39,7 +39,7 @@ exports.assignAgent = async(req,res,next)=>{
       }
     }
     catch(err){
-        //   return res.status(200).json({message:"Error occurred",data:err.message});
+     
         next(err);
     }
    
@@ -62,4 +62,5 @@ exports.getAllAgents = async(req,res,next)=>{
     catch(err){
         next(err);
     }
+
 }
