@@ -2,7 +2,7 @@ const { createRestaurant, getRestaurantById } = require('../controllers/restaura
 const Restaurant = require('../models/restaurantModel');
 const { User } = require('../models/userModel');
 
-// Mock the models
+
 jest.mock('../models/restaurantModel');
 jest.mock('../models/userModel');
 
@@ -20,16 +20,16 @@ describe('Restaurant Controller Unit Tests', () => {
     // TEST CASE 1: createRestaurant
     describe('createRestaurant', () => {
         it('should create a restaurant linked to the logged-in user', async () => {
-            // Simulate the user info usually added by an auth middleware
+            
             req = {
                 user: { id: 'user123' },
                 body: { restaurantName: 'The Pizza Place', location: 'New York' }
             };
 
-            // 1. Mock finding the user
+            
             User.findById.mockResolvedValue({ _id: 'user123', username: 'manager1' });
 
-            // 2. Mock creating the restaurant
+            
             const mockNewRes = { _id: 'res999', ...req.body, managedBy: 'user123' };
             Restaurant.create.mockResolvedValue(mockNewRes);
 
@@ -46,13 +46,13 @@ describe('Restaurant Controller Unit Tests', () => {
         });
     });
 
-    // TEST CASE 2: getRestaurantById (Using managedBy logic)
+    // TEST CASE 2: getRestaurantById 
     describe('getRestaurantById', () => {
         it('should return restaurants managed by a specific user', async () => {
             req = { params: { userId: 'user123' } };
             const mockRestaurants = [{ _id: 'res1', restaurantName: 'Burger King' }];
 
-            // Mock Restaurant.find().populate()
+            
             Restaurant.find.mockReturnValue({
                 populate: jest.fn().mockResolvedValue(mockRestaurants)
             });
@@ -68,7 +68,7 @@ describe('Restaurant Controller Unit Tests', () => {
         it('should return 404 if no restaurant is found for that user', async () => {
             req = { params: { userId: 'user404' } };
 
-            // Mock find to return an empty array
+        
             Restaurant.find.mockReturnValue({
                 populate: jest.fn().mockResolvedValue([])
             });
@@ -81,4 +81,5 @@ describe('Restaurant Controller Unit Tests', () => {
             );
         });
     });
+
 });
