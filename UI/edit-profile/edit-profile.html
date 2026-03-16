@@ -1,42 +1,90 @@
-<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-  <label for="username">Name</label>
-  <input formControlName="username" placeholder="Full Name" />
-  <label for="email">Email</label>
-  <input formControlName="email" type="email" placeholder="Email" />
-  <div class="error" *ngIf="editForm.get('email')?.errors?.['invalidEmail']">
-    <small>Email is invalid</small>
-  </div>
-  <label for="dateofBirth">DOB</label>
-  <input formControlName="dateofBirth" type="date" placeholder="Date of Birth" />
-  <div class="error" *ngIf="editForm.get('dateofBirth')?.errors?.['invalidDate']">
-    <small>⚠️ Not a valid date</small>
-  </div>
+<div class="form-container">
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
 
-  <div formGroupName="address">
-    <label for="flatNo">FLAT-NO</label>
-    <input formControlName="flatNo" placeholder="Flat No" />
-    <label for="landmark">LANDMARK</label>
-    <input formControlName="landmark" placeholder="Landmark" />
-    <label for="street">STREET</label>
-    <input formControlName="street" placeholder="Street" />
-    <label for="city">CITY</label>
-    <input formControlName="city" placeholder="City" />
-    <label for="state">STATE</label>
-    <input formControlName="state" placeholder="State" />
-    <label for="district">DISTRICT</label>
-    <input formControlName="district" placeholder="District" />
-    <label for="zipCode">ZIP-CODE</label>
-    <input formControlName="zipCode" placeholder="Zip Code" />
-    <div class="error" *ngIf="editForm.get('address.zipCode')?.errors?.['invalidZipCode']">
-      <small>Zip-Code is invalid .No of digits must be six only</small>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <h2 class="form-title">Edit Profile</h2>
+    <p class="form-subtitle">Keep your personal and delivery information up to date.</p>
+
+    <div class="form-section">
+      <div class="form-group">
+        <label for="username">Full Name</label>
+        <input formControlName="username" placeholder="Enter your name" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input formControlName="email" type="email" readonly class="readonly-input" />
+        <div class="error" *ngIf="editForm.get('email')?.errors?.['invalidEmail']">
+          <small>Email is invalid</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input formControlName="phoneNumber" placeholder="e.g. 9876543210" />
+        <div class="error" *ngIf="editForm.get('phoneNumber')?.errors?.['invalidPhone']">
+          <small>⚠️ Phone must be 10 digits</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="dateofBirth">Date of Birth</label>
+        <input formControlName="dateofBirth" type="date" />
+        <div class="error" *ngIf="editForm.get('dateofBirth')?.errors?.['invalidDate']">
+          <small>⚠️ Not a valid date</small>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <label for="phone">PHONE</label>
-  <input formControlName="phoneNumber" placeholder="Phone Number" />
-  <div class="error" *ngIf="editForm.get('phoneNumber')?.errors?.['invalidPhone']">
-    <small>⚠️ Phone must be Ten digits only</small>
-  </div>
+    <div class="form-section address-grid" formGroupName="address">
+      <h3 class="section-header">Delivery Address</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Flat No</label>
+          <input formControlName="flatNo" />
+        </div>
+        <div class="form-group">
+          <label>Landmark</label>
+          <input formControlName="landmark" />
+        </div>
+      </div>
 
-  <button type="submit" [disabled]="!isChanged() || editForm.invalid">Save Changes</button>
-</form>
+      <div class="form-group">
+        <label>Street</label>
+        <input formControlName="street" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>City</label>
+          <input formControlName="city" />
+        </div>
+        <div class="form-group">
+          <label>District</label>
+          <input formControlName="district" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>State</label>
+          <input formControlName="state" />
+        </div>
+        <div class="form-group">
+          <label>Zip Code</label>
+          <input formControlName="zipCode" />
+          <div class="error" *ngIf="editForm.get('address.zipCode')?.errors?.['invalidZipCode']">
+            <small>Must be 6 digits</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!isChanged() || editForm.invalid" class="submit-btn">
+      Save Changes
+    </button>
+  </form>
+</div>
