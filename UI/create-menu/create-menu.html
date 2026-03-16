@@ -2,8 +2,11 @@
   <div class="form-card">
     <div class="form-header">
       <span class="header-icon"></span>
-      <h1>Namaste Junction</h1>
-      <p class="address">Location: 123 Main Street, Coimbatore</p>
+      <li *ngFor="let res of allrestaurant">
+          <h1>{{res.restaurantName}}</h1>
+          <p class="address">{{res.address.landmark}}</p>
+      </li>
+      
     </div>
 
     <form #myForm="ngForm" (ngSubmit)="handleSubmit(myForm)" class="menu-form">
@@ -22,6 +25,7 @@
         </div>
         <div class="error-msg" *ngIf="itemName.invalid && itemName.touched">Menu name is required!</div>
       </div>
+     
 
       <div class="form-group">
         <label for="description">Description</label>
@@ -39,11 +43,15 @@
           Description is required!
         </div>
       </div>
+
       <div class="form-group">
         <label for="image">Upload Dish Image</label>
         <div class="input-wrapper">
           <input type="file" id="image" name="image" (change)="onFileSelected($event)" required />
         </div>
+        <div class="error-msg" *ngIf="description.invalid && description.touched">
+          Image is required!
+      </div>
       </div>
 
       <div class="form-group">
