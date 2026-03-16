@@ -1,186 +1,121 @@
-/* --- Hero Section --- */
+/* --- High-End Typography & Layout --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+  color: #1a1a1a;
+}
+
+.hero-small{
+  font-family: 'Playwrite HU';
+}
+
+
+
+
+/* Titles: Playfair Display for that "Boutique" feel */
+h1, .display-3, .section-title, h3.h5 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.01em;
+}
+
+/* Hero Section: Maintaining Original Image Color */
 .hero-section {
-  position: relative;
   height: 60vh;
   min-height: 400px;
-  background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+  background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+  /* Filter removed to keep original colors */
 }
 
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5); /* Darkens the image so text is readable */
+  background: rgba(0, 0, 0, 0.6) !important;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 600px;
-  padding: 0 20px;
-}
-
-.hero-content h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-.cta-button {
-  padding: 12px 32px;
-  font-size: 1.1rem;
-  background-color: #ff4757;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-  background-color: #ff6b81;
-}
-
-/* --- Layout & Typography --- */
-.content-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+/* Section Title: Minimalist Underline */
 .section-title {
-  font-size: 2rem;
-  color: #2f3542;
-  margin-bottom: 30px;
-  border-bottom: 3px solid #ff4757;
-  display: inline-block;
-  padding-bottom: 5px;
+  border-bottom: 2px solid #000 !important;
+    font-family: 'Righteous';
+
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 2rem !important;
+  font-weight: 700;
+  letter-spacing: 3px;
 }
 
-/* --- Restaurant Cards Grid --- */
-.restaurants-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 30px;
-  margin-bottom: 50px;
+/* --- The 3-Item Grid Logic --- */
+/* We use the 'col-lg-4' class in your HTML to ensure 3 items per row on large screens */
+.restaurant-card-hover {
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid #eee !important;
+  background: #fff;
 }
 
-.restaurant-card {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #f1f2f6;
+.restaurant-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+  border-color: #000 !important;
 }
 
-.restaurant-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+/* Keeping Images Original but adding a subtle frame */
+.restaurant-card-hover img {
+  transition: transform 0.6s ease;
 }
 
-/* A placeholder gradient since the model lacks images */
-.card-image-wrapper {
-  height: 180px;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-  position: relative;
+.restaurant-card-hover:hover img {
+  transform: scale(1.03);
 }
 
-.status-badge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #2ed573;
-  color: white;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+.hotel-card{
+font-family: 'Caveat';
+font-size: large;
 }
 
-.status-badge.closed {
-  background: #ff4757;
+/* Badges: Monochrome High Contrast */
+.bg-success {
+  background-color: #000 !important; /* Black for 'Open' */
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.card-info {
-  padding: 20px;
+.bg-danger {
+  background-color: #f0f0f0 !important; /* Light Grey for 'Closed' */
+  color: #888 !important;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.restaurant-name {
-  font-size: 1.4rem;
-  color: #2f3542;
-  margin: 0 0 15px 0;
-}
-
-.info-row {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 8px;
-  color: #57606f;
-  font-size: 0.95rem;
-}
-
-.info-row .icon {
-  margin-right: 10px;
-}
-
-.info-row p {
-  margin: 0;
-  line-height: 1.4;
-}
-
-/* --- Pagination Controls --- */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 40px;
-}
-
-.page-btn {
+/* --- Pagination: Clean & Accessible --- */
+.pagination .page-link {
+  border: 1px solid #eee !important;
+  color: #000 !important;
   padding: 10px 18px;
-  background: white;
-  border: 1px solid #dfe4ea;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  color: #2f3542;
-  transition: all 0.2s;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.page-btn.num-btn {
-  padding: 10px 15px;
+.pagination .page-link:hover {
+  background-color: #000 !important;
+  color: #fff !important;
 }
 
-.page-btn:hover:not([disabled]) {
-  background: #f1f2f6;
-  border-color: #ced6e0;
+/* Active State (Linked to your [ngClass] 'bg-danger') */
+.page-item .bg-danger {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
 }
 
-.page-btn.active {
-  background: #ff4757;
-  color: white;
-  border-color: #ff4757;
-}
-
-.page-btn[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background: #f1f2f6;
+/* Text details styling */
+.text-muted {
+  color: #777 !important;
+  font-weight: 300;
 }
