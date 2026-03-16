@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Explora&family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+:root {
+  --ad-dark: #080808;
+  --gold: #D4AF37;
+  --gold-glow: rgba(212, 175, 55, 0.3);
+  --glass: rgba(255, 255, 255, 0.03);
+}
+
+.chef-specialty-ad {
+  background: #000;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+}
+
+.ad-container {
+  max-width: 1100px;
+  width: 100%;
+  background: var(--ad-dark);
+  border-radius: 40px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  overflow: hidden; /* Stops any overflow */
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+}
+
+/* Luxury Glow Effect */
+.glow-orb {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+  top: -100px;
+  left: -100px;
+  pointer-events: none;
+}
+
+/* Left Side: Content */
+.ad-content {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+.premium-badge {
+  color: gold;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 800;
+  font-size: 1.4rem;
+  border-left: 3px solid gold;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  display: inline-block;
+  font-family: 'Explora';
+}
+
+.ad-title {
+  color: white;
+  font-size: 2.7rem;
+  line-height: 0.9;
+  font-family: 'Playwrite DE Grund';
+  margin: 40px 0;
+}
+
+.ad-title span {
+  color: var(--gold);
+  display: block;
+}
+
+.ad-details .description {
+  color: #cdb293;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 450px;
+  margin-bottom: 30px;
+  font-family: 'Plawrite DE Grund';
+}
+
+.flavor-profile {
+  list-style: none;
+  padding: 0;
+  color: #eee;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 25px;
+}
+
+.flavor-profile li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.flavor-profile strong {
+  color: var(--gold);
+  margin-right: 10px;
+}
+
+/* Right Side: Image */
+.ad-image-box {
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+}
+
+.ad-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 10s ease; /* Slow dramatic zoom */
+}
+
+.ad-container:hover .ad-image-box img {
+  transform: scale(1.1);
+}
+
+.price-tag {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  color: var(--gold);
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: 900;
+  border: 1px solid var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive adjustment */
+@media (max-width: 900px) {
+  .ad-container { grid-template-columns: 1fr; }
+  .ad-title { font-size: 3rem; }
+  .ad-image-box { height: 400px; }
+}
