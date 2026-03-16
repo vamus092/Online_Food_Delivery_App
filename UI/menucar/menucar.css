@@ -1,0 +1,44 @@
+:root {
+  --gold: #c5a059;
+  --dark: #121212;
+}
+
+
+/* The Auto-Scroll Strip */
+.flavor-strip {
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+  padding: 20px 0;
+  display: flex;
+}
+
+.strip-track {
+  display: flex;
+  width: max-content;
+  animation: scrollMenu 15s linear infinite;
+}
+
+.item-group {
+  display: flex;
+  gap: 60px;
+  padding-right: 60px;
+}
+
+.menu-item {
+  font-size: 1.5rem;
+  color: #888;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.menu-item::before {
+  content: "•";
+  color: var(--gold);
+  margin-right: 20px;
+}
+
+@keyframes scrollMenu {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
