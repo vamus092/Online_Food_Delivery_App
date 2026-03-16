@@ -1,130 +1,264 @@
-/* --- Container & Typography --- */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-.order-container {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  padding: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  color: #1a202c;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap');
+
+:root {
+  --primary: #6366f1; /* Brand Indigo */
+  --accent: #818cf8; /* Light Indigo */
+  --text-main: #1e293b;
+  --text-sub: #64748b;
+  --bg-dark: #0f172a;
 }
 
-h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #111827;
-  border-left: 5px solid #6366f1;
-  padding-left: 15px;
-}
-
-/* --- Table Styling --- */
-.order-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e5e7eb;
-}
-
-.order-table th {
-  background-color: #f9fafb;
-  padding: 1rem;
-  text-align: left;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #6b7280;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.order-table td {
-  padding: 1.25rem 1rem;
-  border-bottom: 1px solid #f3f4f6;
-  font-size: 0.9rem;
-  vertical-align: middle;
-}
-
-.order-table tr:last-child td {
-  border-bottom: none;
-}
-
-.order-table tr:hover {
-  background-color: #f8fafc;
-}
-
-/* --- Item List Inside Table --- */
-.item-list {
-  list-style: none;
-  padding: 0;
+/* --- THE CENTERING FIX --- */
+body {
   margin: 0;
+  min-height: 100vh;
+  display: grid; /* Best centering method */
+  place-items: center; /* Centers both X and Y axes */
+  font-family: 'Outfit', sans-serif;
+  box-sizing: border-box;
+  
+  /* Animated Dark Mesh Background */
+  background: radial-gradient(at 10% 10%, #312e81 0px, transparent 50%),
+              radial-gradient(at 90% 90%, #1e1b4b 0px, transparent 50%);
+  background-color: var(--bg-dark);
 }
 
-.item-list li {
-  display: inline-block;
-  background: #edf2f7;
-  color: #4a5568;
-  padding: 2px 8px;
-  border-radius: 4px;
+.page-wrapper {
+  perspective: 1000px; /* For optional card animation */
+}
+
+/* --- The Glassmorphism Container --- */
+.payment-container {
+  width: 100%;
+  max-width: 440px;
+  min-width: 320px;
+  padding: 40px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 50px;
+  margin-top: 70px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 30px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* UPI Section Styling */
+.upi-section {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  margin-top: 20px;
+  border: 1px dashed var(--primary);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.qr-text {
   font-size: 0.8rem;
-  margin: 2px;
-  font-weight: 500;
-}
-
-/* --- Status Badges --- */
-.status-badge {
-  padding: 0.4rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
   font-weight: 700;
-  display: inline-block;
-  text-align: center;
-  min-width: 80px;
-  text-transform: capitalize;
+  color: var(--text-sub);
+  margin-bottom: 15px;
 }
 
-/* Logic for [ngClass] lowercased colors */
-.status-badge.pending { background-color: #fef3c7; color: #92400e; }
-.status-badge.delivered { background-color: #d1fae5; color: #065f46; }
-.status-badge.cancelled { background-color: #fee2e2; color: #991b1b; }
-.status-badge.processing { background-color: #e0e7ff; color: #3730a3; }
-/* Default for "Delivery in progress" or others */
-.status-badge.delivery { background-color: #e0f2fe; color: #075985; }
-
-/* --- Agent Info Styling --- */
-td:nth-child(5), td:nth-child(6) {
-  color: #718096;
-  font-size: 0.85rem;
-}
-
-/* --- Empty State (No Orders) --- */
-.no-orders-container {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: #ffffff;
+.qr-image {
+  padding: 10px;
+  background: white;
   border-radius: 12px;
-  border: 2px dashed #e2e8f0;
-  margin-top: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
 
-.no-orders-message {
-  font-size: 1.25rem;
-  color: #718096;
-  margin-bottom: 1rem;
+.qr-image:hover {
+  transform: scale(1.05);
 }
 
-.no-orders-icon {
-  font-size: 3rem;
-  color: #cbd5e1;
+.timer {
+  margin-top: 15px;
+  font-size: 0.7rem;
+  color: #ef4444;
+  font-weight: 600;
 }
 
-/* --- Responsive Layout --- */
-@media (max-width: 768px) {
-  .order-table {
-    display: block;
-    overflow-x: auto;
-  }
+/* Card Inputs Row for Expiry/CVV side-by-side */
+.row {
+  display: flex;
+  gap: 15px;
 }
+.col { flex: 1; }
+
+/* --- Flamboyant Visual Card --- */
+.card-visual {
+  height: 200px;
+  margin-top: -90px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #1e293b 0%, #111827 100%);
+  border-radius: 24px;
+  padding: 25px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Adding a metallic sheen on hover */
+.card-visual:hover::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  transform: rotate(20deg);
+  transition: 0.5s;
+}
+/* --- Dynamic Card Designs --- */
+
+/* Default/Initial State */
+.card-visual {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: linear-gradient(135deg, #1e293b 0%, #111827 100%);
+}
+
+/* Credit Card: Elegant Gold/Dark Gradient */
+.credit-card-style {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3); /* Slight gold border */
+}
+.credit-card-style::before {
+  content: 'CREDIT';
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  opacity: 0.5;
+}
+
+/* Debit Card: Modern Blue/Teal Gradient */
+.debit-card-style {
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+}
+.debit-card-style::before {
+  content: 'DEBIT';
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  opacity: 0.5;
+}
+
+/* UPI Mode: Minimalist Purple */
+.upi-card-style {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  height: 120px; /* Shrink card visual for UPI to keep QR in view */
+}
+
+/* Ensure the chip looks premium */
+.chip {
+  width: 48px; 
+  height: 36px;
+  background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+  border-radius: 6px;
+  position: relative;
+}
+
+/* Style for the Holder Name on card */
+.card-val {
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace; /* Classic card font vibe */
+}
+
+.card-number-vibe {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  transition: all 0.2s ease;
+}
+
+.card-details { display: flex; justify-content: space-between; align-items: flex-end; }
+.card-label { display: block; font-size: 0.65rem; text-transform: uppercase; opacity: 0.7; letter-spacing: 1px; margin-bottom: 4px; }
+.card-val { font-size: 1rem; font-weight: 700; letter-spacing: 1px; }
+
+/* --- Form Aesthetics --- */
+h2 { text-align: center; color: var(--text-main); font-weight: 700; font-size: 1.8rem; margin-bottom: 30px; }
+
+label { font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 15px; margin-bottom: 8px; display: block; }
+
+input, select {
+  width: 100%;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border: 2px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-main);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15);
+}
+
+/* --- Form Row Layout (maintained for consistency) --- */
+.payment-form { display: flex; flex-direction: column; }
+
+/* Expiry Date Wrapper (Logic maintained) */
+.expiry-wrapper { position: relative; }
+.hidden-picker {
+  visibility: hidden;
+  position: absolute;
+  bottom: 0; left: 0;
+}
+
+/* --- Submit Button --- */
+button[type="submit"] {
+  width: 100%;
+  margin-top: 35px;
+  padding: 18px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--primary) 50%, #4f46e5 100%);
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+  box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
+}
+
+button[type="submit"]:disabled {
+  background: #267eeb;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* --- Dynamic Errors --- */
+.error { color: #e11d48; font-size: 0.8rem; font-weight: 600; margin-top: 6px; }
