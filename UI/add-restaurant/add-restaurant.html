@@ -1,30 +1,21 @@
-<div class="form-container">
+<!-- <div class="form-container">
   <h2>Register Restaurant</h2>
 
   <div *ngIf="showSuccess" class="alert-success">Restaurant added successfully!</div>
 
-  <form #resForm="ngForm" (ngSubmit)="onSubmit(resForm)" novalidate>
+  <form #resForm="ngForm" (ngSubmit)="onSubmit(resForm)">
+    
     <div class="form-group">
       <label>Restaurant Name</label>
-      <input type="text" name="restaurantName" [(ngModel)]="restaurant.restaurantName" required />
+      <input type="text" name="restaurantName" ngModel required />
     </div>
 
     <fieldset>
       <legend>Address</legend>
-      <input
-        type="text"
-        name="landmark"
-        placeholder="Landmark"
-        [(ngModel)]="restaurant.address.landmark"
-      />
-      <input
-        type="text"
-        name="district"
-        placeholder="District"
-        [(ngModel)]="restaurant.address.district"
-      />
+      <input type="text" name="landmark" placeholder="Landmark" ngModel />
+      <input type="text" name="district" placeholder="District" ngModel />
 
-      <select name="state" [(ngModel)]="restaurant.address.state" required>
+      <select name="state" ngModel required>
         <option value="" disabled selected>Select a State</option>
         <option *ngFor="let s of states" [value]="s">{{ s }}</option>
       </select>
@@ -32,15 +23,20 @@
 
     <div class="form-group">
       <label>Opening Hours</label>
-
       <div>
         <label>Open</label>
-        <input type="time" name="openTime" [(ngModel)]="restaurant.openingHours.open" required />
+        <input type="time" name="openTime" ngModel required />
       </div>
-
       <div>
         <label>Close</label>
-        <input type="time" name="closeTime" [(ngModel)]="restaurant.openingHours.close" required />
+        <input type="time" name="closeTime" ngModel required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Add Restaurant Image</label>
+      <div class="input-wrapper">
+        <input type="file" id="image" name="image" (change)="onFileSelected($event)" required />
       </div>
     </div>
 
@@ -49,7 +45,7 @@
       <input
         type="text"
         name="contactNumber"
-        [(ngModel)]="restaurant.contactNumber"
+        ngModel
         #phone="ngModel"
         required
         pattern="^\d{10}$"
@@ -64,4 +60,112 @@
 
     <button type="submit" [disabled]="resForm.invalid">Register Restaurant</button>
   </form>
+</div> -->
+
+
+
+
+
+
+
+<div class="page-viewport">
+  <div class="main-card animate-fade-in">
+    
+    <div class="hero-side">
+      <div class="overlay"></div>
+      <div class="hero-content">
+        <h1>Partner with us.</h1>
+        <p>List your restaurant and reach thousands of hungry customers in your area.</p>
+        <div class="stats-badge">
+          <span>★ 4.9</span>
+          <small>Partner Rating</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-side">
+      <div class="form-header">
+        <h2>Register Restaurant</h2>
+        <div *ngIf="showSuccess" class="alert-success">
+          <i class="icon-check"></i> Restaurant added successfully!
+        </div>
+      </div>
+
+      <form #resForm="ngForm" (ngSubmit)="onSubmit(resForm)">
+        
+        <div class="form-section">
+          <label>Restaurant Identity</label>
+          <div class="input-container">
+            <input type="text" name="restaurantName" ngModel required placeholder="e.g. The Golden Bistro" />
+          </div>
+        </div>
+
+        <div class="address-grid">
+          <label class="grid-label">Location Details</label>
+          <div class="field-row">
+            <input type="text" name="landmark" placeholder="Landmark" ngModel />
+            <input type="text" name="district" placeholder="District" ngModel />
+          </div>
+          <select name="state" ngModel required>
+            <option value="" disabled selected>Select a State</option>
+            <option *ngFor="let s of states" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+
+        <div class="time-section">
+          <label>Operating Hours</label>
+          <div class="time-grid">
+            <div class="time-input">
+              <small>Opens at</small>
+              <input type="time" name="openTime" ngModel required />
+            </div>
+            <div class="time-input">
+              <small>Closes at</small>
+              <input type="time" name="closeTime" ngModel required />
+            </div>
+          </div>
+        </div>
+
+ <div class="form-section">
+  <label>Storefront Photo</label>
+  
+  <div class="file-drop-zone" [class.has-image]="imagePreview">
+    
+    <input type="file" id="image" name="image" (change)="onFileSelected($event)" required accept="image/*" />
+
+    <div class="file-dummy" *ngIf="!imagePreview">
+      <span class="upload-icon">📸</span>
+      <div class="cta-text">
+        <span class="primary-cta">Drag & Drop Storefront Photo</span>
+        <span class="secondary-cta">or click to browse</span>
+      </div>
+    </div>
+
+    <div class="image-preview-card" *ngIf="imagePreview">
+      <img [src]="imagePreview" alt="Storefront Preview" class="preview-img" />
+      <div class="preview-overlay">
+        <button type="button" class="action-btn change-btn">Change Photo</button>
+        <button type="button" class="action-btn remove-btn" (click)="removeImage()">Remove</button>
+      </div>
+      <div class="success-badge-v2">✓ Photo Ready</div>
+    </div>
+  </div>
+</div>
+
+        <div class="form-section">
+          <label>Contact Number</label>
+          <input type="text" name="contactNumber" ngModel #phone="ngModel" required pattern="^\d{10}$" placeholder="10-digit mobile number" />
+          <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-msg">
+            <small *ngIf="phone.errors?.['required']">Phone number is required.</small>
+            <small *ngIf="phone.errors?.['pattern']">Must be a valid 10-digit number.</small>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="resForm.invalid" class="submit-btn">
+          <span>Launch Restaurant</span>
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
