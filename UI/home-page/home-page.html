@@ -1,71 +1,108 @@
-<section class="hero-section">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <h1>Your Favorite Food,<br />Delivered Fast.</h1>
-    <p>Explore top-rated restaurants in your district and satisfy your cravings.</p>
-  </div>
-</section>
 
-<section class="content-section">
-  <h2 class="section-title">Popular Near You</h2>
 
-  <div class="restaurants-container">
-    <div
-      *ngFor="let restaurant of paginatedRestaurants"
-      class="restaurant-card"
-      (click)="onRestaurantClick(restaurant.restaurantName, restaurant._id)"
-      style="cursor: pointer"
-    >
-      <div class="card-image-wrapper">
-        <span class="status-badge" [class.closed]="!restaurant.isOperating">
-          {{ restaurant.isOperating ? 'Open Now' : 'Currently Closed' }}
-        </span>
-      </div>
 
-      <div class="card-info">
-        <h3 class="restaurant-name">{{ restaurant.restaurantName }}</h3>
+<div [ngClass]="isDarkMode ? 'midnight-mode' : 'light-mode'" class="app-container">
+  
+  <section class="hero-section position-relative d-flex align-items-center justify-content-center text-center text-white py-5">
+    <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100" 
+         [ngStyle]="{'background': isDarkMode ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.4)'}"></div>
+    <div class="hero-content position-relative z-index-1 container px-4">
+      <h1 class="display-3 fw-bold mb-3">Your Favorite Food,<br />Delivered Fast.</h1>
+      <p class=" hero-small lead mb-0">Explore top-rated restaurants in your district and satisfy your cravings.</p>
+    </div>
+  </section>
 
-        <div class="info-row">
-          <span class="icon">📍</span>
-          <p>
-            {{ restaurant.address.landmark }}, {{ restaurant.address.district }},
-            {{ restaurant.address.state }}
-          </p>
-        </div>
+  <div class="container position-relative z-index-2 mb-5" style="margin-top: -30px;">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="position-relative">
+          <div class="input-group search-pill shadow-lg p-2 border-0">
+            <input 
+              type="text" 
+              class="form-control border-0 shadow-none py-2 px-3 theme-input" 
+              placeholder="Search restaurants or type 'orders'..."
+              [(ngModel)]="searchTerm"
+              (input)="onSearchChange($event)"
+            >
+            <button *ngIf="searchTerm" (click)="clearSearch()" class="btn border-0 bg-transparent text-muted pe-4">✕</button>
+          </div>
 
-        <div class="info-row">
-          <span class="icon">🕒</span>
-          <p>{{ restaurant.openingHours.open }} - {{ restaurant.openingHours.close }}</p>
-        </div>
+          <div *ngIf="searchTerm && searchTerm.toLowerCase() !== 'orders'" 
+               class="search-results-overlay shadow-lg rounded-4 mt-2 theme-card overflow-hidden">
+            
+            <div *ngIf="filteredResults.length > 0">
+              <div 
+                *ngFor="let res of filteredResults" 
+                (click)="onRestaurantClick(res.restaurantName, res._id)"
+                class="search-item d-flex align-items-center p-3 border-bottom-theme"
+              >
+                <img [src]="'http://localhost:8000/' + res.restaurantImage" class="rounded-circle me-3" style="width: 45px; height: 45px; object-fit: cover;">
+                <div class="flex-grow-1">
+                  <div class="fw-bold theme-text-main">{{ res.restaurantName }}</div>
+                  <small class="theme-text-muted">📍 {{ res.address.district }}</small>
+                </div>
+                <span class="theme-text-muted small">View Menu →</span>
+              </div>
+            </div>
 
-        <div class="info-row">
-          <span class="icon">📞</span>
-          <p>{{ restaurant.contactNumber }}</p>
+            <div *ngIf="filteredResults.length === 0" class="p-5 text-center">
+              <div class="display-6 mb-3">🍽️</div>
+              <h4 class="h6 fw-bold theme-text-main">No restaurants found for "{{ searchTerm }}"</h4>
+              <p class="theme-text-muted small mb-0">Try checking your spelling or searching for a district.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="pagination" *ngIf="totalPages > 1">
-    <button class="page-btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
-      &larr; Prev
-    </button>
+  <section id="restaurant-list" class="container mb-5">
+    <div class="d-flex align-items-center mb-4">
+      <h2 class="section-title h3 fw-bold theme-border-bottom pb-2">Popular Restaurants</h2>
+    </div>
 
-    <button
-      class="page-btn num-btn"
-      *ngFor="let page of pagesArray"
-      (click)="goToPage(page)"
-      [class.active]="currentPage === page"
-    >
-      {{ page }}
-    </button>
+    <div class="row g-4 justify-content-center">
+      <div *ngFor="let restaurant of paginatedRestaurants" class="hotel-card col-12 col-md-6 col-lg-4" (click)="onRestaurantClick(restaurant.restaurantName, restaurant._id)">
+        <div class="card h-100 border-0 shadow-sm rounded-4 restaurant-card-hover theme-card overflow-hidden">
+          <div class="position-relative" style="height: 220px;">
+            <img [src]="'http://localhost:8000/' + restaurant.restaurantImage" class="w-100 h-100 object-fit-cover" />
+            <span class="badge position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm" 
+                  [ngClass]="restaurant.isOperating ? 'bg-success' : 'bg-danger'">
+              {{ restaurant.isOperating ? 'Open Now' : 'Currently Closed' }}
+            </span>
+          </div>
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold theme-text-main mb-3">{{ restaurant.restaurantName }}</h3>
+            <div class="theme-text-muted small">
+              <p class="mb-1">📍 {{ restaurant.address.landmark }}, {{ restaurant.address.district }}</p>
+              <p class="mb-0">🕒 {{ restaurant.openingHours.open }} - {{ restaurant.openingHours.close }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <button
-      class="page-btn"
-      (click)="goToPage(currentPage + 1)"
-      [disabled]="currentPage === totalPages"
-    >
-      Next &rarr;
-    </button>
-  </div>
-</section>
+    <nav aria-label="Page navigation" class="mt-5 d-flex justify-content-center" *ngIf="totalPages > 1 && !searchTerm">
+      <ul class="pagination pagination-custom">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="goToPage(currentPage - 1)">Previous</button>
+        </li>
+        <li class="page-item" *ngFor="let page of pagesArray" [class.active]="currentPage === page">
+          <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link" (click)="goToPage(currentPage + 1)">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </section>
+</div> 
+
+<app-carousel></app-carousel>
+<app-chefspl></app-chefspl>
+<app-menucar></app-menucar>
+<app-ad></app-ad>
+
+ <app-horizon></app-horizon>
+
+<!-- <app-feedback></app-feedback>  -->
