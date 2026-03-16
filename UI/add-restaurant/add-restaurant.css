@@ -1,4 +1,4 @@
-:host {
+/* :host {
   display: block;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
@@ -20,7 +20,6 @@ h2 {
   text-align: center;
 }
 
-/* Field styling */
 .form-group {
   margin-bottom: 20px;
 }
@@ -40,7 +39,7 @@ input[type="time"] {
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-sizing: border-box; /* Crucial for padding */
+  box-sizing: border-box; 
 }
 
 input:focus {
@@ -49,7 +48,6 @@ input:focus {
   outline: none;
 }
 
-/* Fieldset and Layout */
 fieldset {
   border: 1px solid #eee;
   padding: 15px;
@@ -69,7 +67,6 @@ legend {
   align-items: center;
 }
 
-/* Button */
 button {
   width: 100%;
   padding: 14px;
@@ -91,8 +88,6 @@ button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
-
-/* Success Alert */
 .alert-success {
   background-color: #d1e7dd;
   color: #0f5132;
@@ -103,7 +98,6 @@ button:disabled {
   border: 1px solid #badbcc;
   font-weight: 500;
 }
-/* ... existing CSS ... */
 
 select {
   width: 100%;
@@ -119,4 +113,232 @@ select {
   color: #d9534f;
   font-size: 0.85rem;
   margin-top: 5px;
+} */
+
+
+
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:host {
+  --primary: #e67e22; /* Warm Carrot Orange */
+  --secondary: #2c3e50;
+  --bg: #fdfaf7;
+  --text: #34495e;
+  --white: #ffffff;
 }
+
+.page-viewport {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.main-card {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  background: var(--white);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(230, 126, 34, 0.15);
+}
+
+/* Hero Section (Hidden on Mobile) */
+.hero-side {
+  flex: 1;
+  background: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=1000') center/cover;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  color: white;
+}
+
+.hero-side .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.hero-content { position: relative; z-index: 2; }
+.hero-content h1 { font-size: 2.5rem; margin-bottom: 10px; }
+.hero-content p { opacity: 0.9; line-height: 1.6; }
+
+/* Form Section */
+.form-side {
+  flex: 1.2;
+  padding: 50px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+h2 { font-size: 1.8rem; font-weight: 700; color: var(--secondary); margin-bottom: 30px; }
+
+/* Input Styling */
+.form-section, .address-grid, .time-section { margin-bottom: 25px; }
+
+label { font-weight: 600; color: var(--secondary); margin-bottom: 8px; display: block; font-size: 0.95rem; }
+
+input[type="text"], input[type="time"], select {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: #fcfcfc;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+  background: white;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.1);
+}
+
+/* Address & Time Grids */
+.field-row, .time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.address-grid select { margin-top: 15px; }
+.time-input small { display: block; margin-bottom: 5px; color: #7f8c8d; }
+
+/* File Upload UX */
+.file-drop-zone {
+  position: relative;
+  border: 2px dashed #dcdde1; /* The initial dashed state */
+  border-radius: 16px;
+  height: 220px; /* Tall enough for a good visual on both PC & Mobile */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden; /* Important to clip the preview image */
+}
+
+/* Hover state for the Drop Zone (Desktop) */
+.file-drop-zone:hover:not(.has-image) {
+  border-color: var(--primary);
+  background: rgba(230, 126, 34, 0.02);
+}
+
+/* The [has-image] state from HTML: switches to a clean border */
+.file-drop-zone.has-image {
+  border: 2px solid #f0f0f0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* The invisible input that catches clicks */
+.file-drop-zone input {
+  position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10;
+}
+
+/* State 1: Cta Styling */
+.file-dummy { text-align: center; }
+.upload-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+.cta-text .primary-cta { display: block; font-weight: 600; color: #2c3e50; font-size: 1rem; }
+.cta-text .secondary-cta { font-size: 0.85rem; color: #7f8c8d; margin-top: 4px; display: block; }
+
+/* State 2: Preview Gallery Styling */
+.image-preview-card {
+  width: 100%; height: 100%; position: relative; animation: popIn 0.3s ease-out;
+}
+
+.preview-img {
+  width: 100%; height: 100%; object-fit: cover; /* Important: prevents the image from squishing */
+}
+
+/* The Action Overlay (Change/Remove) on hover */
+.preview-overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+
+.image-preview-card:hover .preview-overlay { opacity: 1; }
+
+.action-btn {
+  padding: 8px 16px; border: 2px solid white; border-radius: 20px;
+  background: transparent; color: white; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.2s;
+}
+
+.change-btn:hover { background: rgba(255,255,255,0.1); }
+.remove-btn { border-color: #ef4444; background: #ef4444; }
+.remove-btn:hover { background: #dc2626; border-color: #dc2626; }
+
+/* Dynamic Success Status */
+.success-badge-v2 {
+  position: absolute; top: 12px; right: 12px;
+  background: #10b981; color: white; padding: 6px 12px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 700;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+@keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* Mobile optimization: make the zone slightly shorter for screen real estate */
+@media (max-width: 600px) {
+  .file-drop-zone { height: 180px; }
+}
+/* Dynamic Button */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #d35400;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);
+}
+
+.submit-btn:disabled { background: #bdc3c7; cursor: not-allowed; }
+
+/* Alert Styling */
+.alert-success {
+  background: #ecfdf5;
+  color: #059669;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .hero-side { display: none; }
+  .main-card { max-width: 500px; }
+  .form-side { padding: 30px; }
+}
+
+/* Entry Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.6s ease-out; }
