@@ -1,102 +1,241 @@
-/* Container styling */
-form {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+:root {
+  --primary: #6366f1;
+  --bg-subtle: #f9fafb;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --error: #ef4444;
 }
 
-/* Labels */
+.form-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: var(--bg-subtle);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden; /* Prevents scrollbars from the floating objects */
+  z-index: 1;
+}
+.floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1; /* Sits behind the form */
+  opacity: 0.4;
+  animation: drift 15s infinite alternate ease-in-out;
+}
+
+/* Orb 1: Top Left - Light Red/Pink */
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: #ff6b6b;
+  top: -100px;
+  left: -50px;
+}
+
+/* Orb 2: Bottom Right - Indigo/Blue */
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: #6366f1;
+  bottom: -150px;
+  right: -50px;
+  animation-duration: 20s;
+  animation-delay: -5s;
+}
+
+/* Orb 3: Middle Left - Yellow */
+.orb-3 {
+  width: 200px;
+  height: 200px;
+  background: #ffcc00;
+  top: 40%;
+  left: 10%;
+  opacity: 0.5;
+  animation-duration: 12s;
+}
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fcfcfc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* --- THE 3 OBJECTS --- */
+.food-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* User can click through them */
+  z-index: 5;
+}
+
+.floating-food {
+  position: absolute;
+  filter: drop-shadow(0 15px 20px rgba(0,0,0,0.12));
+  animation: float 18s infinite ease-in-out;
+}
+
+/* Individual Placements */
+.pizza {
+  width: 280px;
+  top: 10%;
+  left: 8%;
+  animation-duration: 20s;
+}
+
+.burgers {
+  width: 320px;
+  top: 15%;
+  right: 5%;
+  animation-duration: 22s;
+  animation-delay: -4s;
+}
+
+.salad {
+  width: 240px;
+  bottom: 10%;
+  left: 12%;
+  animation-duration: 16s;
+  animation-delay: -2s;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 60px) scale(1.1);
+  }
+  100% {
+    transform: translate(-20px, -40px) scale(0.9);
+  }
+}
+
+form {
+backdrop-filter: blur(10px);
+  /* background: rgba(255, 255, 255, 0.85); */
+  border: 1px solid rgba(255, 255, 255, 0.3);  
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+}
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+.section-header {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 32px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  grid-column: span 2;
+}
+
+/* Layout Helpers */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
 label {
   display: block;
+  font-size: 0.8rem;
   font-weight: 600;
-  font-size: 0.85rem;
-  color: #4a5568;
-  margin-bottom: 0.5rem;
-  margin-top: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  transition: color 0.2s;
 }
 
-/* Inputs */
 input {
   width: 100%;
-  padding: 12px 16px;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-sizing: border-box; /* Crucial for padding */
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
 }
 
 input:focus {
   outline: none;
-  border-color: #4299e1;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
-/* Address Group Section */
-div[formGroupName="address"] {
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  background-color: #f8fafc;
-  border-radius: 10px;
-  border: 1px solid #edf2f7;
+.readonly-input {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  color: var(--text-muted);
 }
 
-div[formGroupName="address"] label:first-child {
-  margin-top: 0;
-}
-
-/* Error Messages */
+/* Error Styles */
 .error {
-  margin-top: 0.4rem;
-  color: #e53e3e;
-  font-weight: 500;
-  animation: fadeIn 0.3s ease;
-}
-
-.error small {
-  display: flex;
-  align-items: center;
+  color: var(--error);
   font-size: 0.75rem;
+  margin-top: 5px;
 }
 
-/* Submit Button */
-button[type="submit"] {
+/* Button */
+.submit-btn {
   width: 100%;
-  margin-top: 2rem;
   padding: 14px;
-  background-color: #3182ce;
-  color: white;
+  background-color: rgb(204, 72, 72);
+  color: rgb(0, 0, 0);
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: transform 0.1s, background-color 0.2s;
+  margin-top: 20px;
 }
 
-button[type="submit"]:hover:not(:disabled) {
-  background-color: #2b6cb0;
+.submit-btn:hover:not(:disabled) {
+  background-color: #ff0000;
   transform: translateY(-1px);
 }
 
-button[type="submit"]:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-button[type="submit"]:disabled {
-  background-color: #cbd5e0;
+.submit-btn:disabled {
+  background-color: #959798;
   cursor: not-allowed;
-  opacity: 0.7;
 }
 
-/* Simple Animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  form {
+    padding: 24px;
+  }
 }
