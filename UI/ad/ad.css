@@ -1,0 +1,169 @@
+:root {
+  --grad-orange: linear-gradient(135deg, #FF8C00 0%, #FAD961 100%);
+  --grad-yellow: linear-gradient(135deg, #FFE000 0%, #FFB100 100%);
+  --bg-cream: #FFFDF0; /* Soft buttery background */
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --text-main: #4A3B00; /* Dark bronze instead of black for better harmony */
+  --accent-yellow: #FFD700;
+}
+
+body {
+  background-color: #FEF9E7; /* Warm background for the whole page */
+  padding: 50px 0;
+}
+
+.dynamic-stepper {
+  font-family: 'Outfit', sans-serif;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  padding: 60px 40px;
+  max-width: 900px;
+  margin: auto;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 30px 60px rgba(255, 166, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background circle for UX "Pop" */
+.dynamic-stepper::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.stepper-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.badge-vibe {
+  background: #FFF0BB;
+  color: #D48806;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid rgba(212, 136, 6, 0.2);
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 42px;
+  margin: 15px 0;
+  color: var(--text-main);
+  letter-spacing: -1px;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  gap: 20px;
+}
+
+.progress-line {
+  position: absolute;
+  top: 40px;
+  left: 5%;
+  right: 5%;
+  height: 6px;
+  background: #F2EBCF;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.progress-fill {
+  width: 75%; /* Simulates progress to step 3 */
+  height: 100%;
+  background: var(--grad-orange);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+}
+
+.step-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  text-align: center;
+}
+
+.icon-blob {
+  width: 85px;
+  height: 85px;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Organic Blob Shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 20px;
+  background-size: 200% 200%;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 15px 30px rgba(255, 166, 0, 0.25);
+}
+
+.step-item:hover .icon-blob {
+  transform: scale(1.1) rotate(5deg);
+  border-radius: 50%; /* Smooths out on hover */
+}
+
+.orange { background: var(--grad-orange); }
+.yellow { background: var(--grad-yellow); }
+
+.step-num {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--text-main);
+  color: #FFD700;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid white;
+}
+
+.emoji {
+  font-size: 34px;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.15));
+}
+
+.step-content h4 {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.step-content p {
+  font-size: 14px;
+  color: #7D6B40;
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+/* Custom Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.step-item:nth-child(odd) .icon-blob {
+  animation: float 4s ease-in-out infinite;
+}
+.step-item:nth-child(even) .icon-blob {
+  animation: float 4s ease-in-out infinite 2s;
+}
