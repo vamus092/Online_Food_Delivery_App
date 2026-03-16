@@ -2,13 +2,15 @@
   <div class="bg-overlay"></div>
 
   <div class="signup-card">
+    
     <div class="form-header">
       <div class="brand-icon">🥗</div>
-      <h1>Join Lunch Box</h1>
+      <h1>Join FlavorHub</h1>
       <p>Create your account to start ordering</p>
     </div>
 
     <form class="form-box" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      
       <div class="form-grid">
         <!-- Full Name -->
         <div class="input-group">
@@ -178,13 +180,14 @@
           <select id="role" class="input-field" formControlName="role">
             <option value="" disabled selected>Select Role</option>
             <option value="HOTEL-MANAGER">Hotel Manager</option>
-            <option value="ADMIN">Admin</option>
+            <!-- <option value="ADMIN">Admin</option> -->
             <option value="USER">User</option>
           </select>
           <div class="error" *ngIf="signupForm.get('role')?.errors?.['required']">
             <small>⚠️ Role selection is required</small>
           </div>
         </div>
+
       </div>
 
       <button type="submit" [disabled]="signupForm.invalid" class="form-btn">Create Account</button>
@@ -193,5 +196,6 @@
         <p>Already have an account? <a routerLink="/login">Sign In</a></p>
       </div>
     </form>
+
   </div>
 </div>
