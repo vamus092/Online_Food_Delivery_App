@@ -1,26 +1,71 @@
-<div class="cart-container" *ngIf="cartItems.length > 0; else emptyCart">
-  <h2>Your Cart</h2>
-  <div class="cart-items">
-    <div *ngFor="let item of cartItems" class="cart-card">
-      <h3>{{ item.itemName }}</h3>
-      <p>Price: ₹{{ item.price }}</p>
-      <p>Quantity: {{ item.quantity }}</p>
-      <button (click)="handleIncreaseQuantity(item._id)">+</button>
-      <button (click)="handleDecreaseQuantity(item._id)">-</button>
-      <button (click)="handleRemoveItem(item._id)" class="delete-btn">
-          Remove Item
-      </button>
+<div class="container py-5">
+  <div class="cart-container mx-auto" *ngIf="cartItems.length > 0; else emptyCart">
+    <h2 class="fw-bold mb-4 text-dark border-start border-primary border-5 ps-3">Your Shopping Cart</h2>
+    
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div *ngFor="let item of cartItems" class="card border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
+          <div class="card-body p-3">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+              <div class="flex-grow-1">
+                <h5 class="fw-bold mb-1 text-success">{{ item.itemName }}</h5>
+                <p class="text-muted small mb-0">Price: ₹{{ item.price }}</p>
+              </div>
+
+              <div class="d-flex align-items-center bg-light rounded-pill px-2 py-1">
+                <button (click)="handleDecreaseQuantity(item._id)" class="btn btn-sm btn-link text-danger text-decoration-none fw-bold px-2">−</button>
+                <span class="px-3 fw-bold">{{ item.quantity }}</span>
+                <button (click)="handleIncreaseQuantity(item._id)" class="btn btn-sm btn-link text-success text-decoration-none fw-bold px-2">+</button>
+              </div>
+
+              <div class="text-end" style="min-width: 100px;">
+                <p class="fw-bold mb-1">₹{{ item.price * item.quantity }}</p>
+                <button (click)="handleRemoveItem(item._id)" class="btn btn-link btn-sm text-danger p-0 text-decoration-none small">
+                  <i class="bi bi-trash me-1"></i>Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 sticky-top" style="top: 100px;">
+          <div class="card-body p-4">
+            <h4 class="fw-bold mb-4">Bill Details</h4>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Item Total</span>
+              <span>₹{{ total }}</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2 text-success small">
+              <span>Delivery Fee</span>
+              <span>FREE</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between mb-4">
+              <span class="fw-bold">To Pay</span>
+              <span class="fw-bold text-dark fs-5">₹{{ total }}</span>
+            </div>
+            
+            <button *ngIf="currentUser" (click)="placeOrder()" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm checkout-btn-custom">
+              Place Order <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="cart-summary">
-    <h3>Total: ₹{{ total }}</h3>
-    <button *ngIf="currentUser" (click)=" placeOrder()" class="checkout-btn">Place Order</button>
   </div>
 </div>
 
 <ng-template #emptyCart>
-  <div class="empty-cart">
-    <i class="fas fa-shopping-cart"></i>
-    <p>Your cart is empty.</p>
+  <div class="container py-5 text-center">
+    <div class="empty-cart-animation mx-auto mb-4" style="max-width: 250px;">
+      <img src="assets/emptycart.png" alt="Empty Cart" class="img-fluid rounded-4 shadow-sm">
+    </div>
+    <h3 class="fw-bold text-dark">Your cart is empty</h3>
+    <p class="text-muted">Looks like you haven't added any delicious food yet.</p>
+    <!-- <a routerLink="/" class="btn btn-success rounded-pill px-5 py-2 fw-bold mt-3 shadow-sm">
+      Browse Restaurants
+    </a> -->
   </div>
 </ng-template>
