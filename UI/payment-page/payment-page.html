@@ -1,83 +1,68 @@
-<div class="payment-container">
-  <h2>Payment Page</h2>
-  <div class="total-section">
-    <h3>Total Amount: ₹{{ totalAmount }}</h3>
+<div class="page-wrapper">
+  <div class="payment-container">
+    <div class="card-visual" [ngClass]="{
+      'credit-card-style': cardForm.value.paymentMethod === 'CREDIT CARD',
+      'debit-card-style': cardForm.value.paymentMethod === 'DEBIT CARD',
+      'upi-card-style': cardForm.value.paymentMethod === 'UPI'
+    }">
+      <div class="chip"></div>
+      <div class="card-number-vibe">
+        {{ cardForm.value.paymentMethod === 'UPI' ? 'UPI PAYMENT ACTIVE' : (maskedCardNumber || '•••• •••• ••••') }}
+      </div>
+      <div class="card-details">
+        <div>
+          <span class="card-label">Card Holder</span>
+          <span class="card-val">{{ cardForm.value.cardHolder || 'FULL NAME' }}</span>
+        </div>
+        <div *ngIf="cardForm.value.paymentMethod !== 'UPI'">
+          <span class="card-label">Expiry</span>
+          <span class="card-val">{{ displayExpiry || 'MM/YY' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="payment-form" #cardForm="ngForm" (ngSubmit)="makePayment(cardForm)">
+      
+      <label for="paymentMethod">Payment Method</label>
+      <select id="paymentMethod" name="paymentMethod" ngModel required>
+        <option value="" disabled selected>Select a method</option>
+        <option value="DEBIT CARD">Debit Card</option>
+        <option value="CREDIT CARD">Credit Card</option>
+        <option value="UPI">UPI</option>
+      </select>
+
+      <div class="upi-section" *ngIf="cardForm.value.paymentMethod === 'UPI'">
+        <div class="qr-container">
+          <p class="qr-text">Scan to Pay via any UPI App</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=dummy@upi&pn=Restaurant&am={{totalAmount}}" alt="QR Code" class="qr-image">
+          <div class="timer">QR expires in 05:00</div>
+        </div>
+      </div>
+
+      <div class="card-inputs-wrapper" *ngIf="cardForm.value.paymentMethod !== 'UPI'">
+        
+        <label for="cardHolder">Card Holder Name</label>
+        <input id="cardHolder" name="cardHolder" type="text" ngModel placeholder="John Doe" required />
+
+        <label for="cardNumber">Card Number</label>
+        <input id="cardNumber" name="cardNumber" type="text" ngModel placeholder="1234 5678 9012" maxlength="15" required (input)="onCardNumberInput($event)" />
+
+        <div class="row">
+          <div class="col">
+            <label for="expiry">Expiry Date</label>
+            <input name="expiry" id="expiryDisplay" type="text" [value]="displayExpiry" placeholder="MM/YY" readonly required (click)="picker.showPicker()" />
+            <input name="date" #picker type="date" [min]="minDate" (change)="onDateChange($event)" class="hidden-picker" />
+          </div>
+          <div class="col">
+            <label for="cvv">CVV</label>
+            <input id="cvv" name="cvv" type="password" ngModel placeholder="•••" maxlength="3" required (input)="onCvvInput($event)" />
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="cardForm.invalid || (cardForm.value.paymentMethod !== 'UPI' && !displayExpiry)">
+        <span>Pay ₹{{ totalAmount }}</span>
+      </button>
+    </form>
   </div>
-
-  <form class="payment-form" #cardForm="ngForm" (ngSubmit)="makePayment(cardForm)">
-    
-    <!-- Payment Method Select -->
-    <label for="paymentMethod">Payment Method:</label>
-    <select id="paymentMethod" name="paymentMethod" ngModel required>
-      <option value="" disabled selected>Select a method</option>
-      <option value="DEBIT CARD">Debit Card</option>
-      <option value="CREDIT CARD">Credit Card</option>
-      <option value="UPI">UPI</option>
-    </select>
-    <div class="error" *ngIf="cardForm.controls['paymentMethod']?.invalid && cardForm.controls['paymentMethod']?.touched">
-      Please select a payment method
-    </div>
-
-    <!-- Card Number -->
-    <label for="cardNumber">Card Number:</label>
-    <input
-      id="cardNumber"
-      name="cardNumber"
-      type="text"
-      ngModel
-      placeholder="1234 5678 9012"
-      required
-      card-Number
-    />
-    <div
-      class="error"
-      *ngIf="
-        cardForm.controls['cardNumber']?.invalid &&
-        cardForm.controls['cardNumber']?.touched &&
-        cardForm.controls['cardNumber']?.errors?.['invalidCardNumber']
-      "
-    >
-      Invalid Card Number
-    </div>
-
-    <!-- Expiry Date -->
-    <label for="expiry">Expiry Date:</label>
-    <div style="position: relative">
-      <input
-        name="expiry"
-        id="expiryDisplay"
-        type="text"
-        [value]="displayExpiry"
-        placeholder="MM/YY"
-        readonly
-        required
-        (click)="picker.showPicker()"
-        style="cursor: pointer; width: 100%"
-      />
-      <input
-        name="date"
-        #picker
-        type="date"
-        [min]="minDate"
-        (change)="onDateChange($event)"
-        style="visibility: hidden; position: absolute; bottom: 0; left: 0"
-      />
-    </div>
-
-    <!-- CVV -->
-    <label for="cvv">CVV:</label>
-    <input id="cvv" name="cvv" type="password" ngModel placeholder="***" required cvv-Number />
-    <div
-      class="error"
-      *ngIf="
-        cardForm.controls['cvv']?.invalid &&
-        cardForm.controls['cvv']?.touched &&
-        cardForm.controls['cvv']?.errors?.['invalidCvv']
-      "
-    >
-      Invalid CVV
-    </div>
-
-    <button type="submit" [disabled]="cardForm.invalid || !displayExpiry">Pay Now</button>
-  </form>
 </div>
