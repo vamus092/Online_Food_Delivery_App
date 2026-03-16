@@ -1,72 +1,99 @@
-<div class="manager-container">
-  <h2>Hotel Manager Panel</h2>
- 
-  <div class="controls">
-    <label for="statusFilter">Filter by Status:</label>
-    <select id="statusFilter" [(ngModel)]="selectedStatus" (change)="filterOrders()">
-      <option value="All">All</option>
-      <option value="Pending">Pending</option>
-      <option value="Delivery in progress">Delivery in Progress</option>
-      <option value="Delivered">Delivered</option>
-      <option value="Cancelled With refund">Cancelled With refund</option>
-    </select>
+<div class="container py-4">
+  <div class="card shadow-sm border-0 rounded-3">
+    <div class="card-header bg-white py-3 border-0">
+      <div class="row align-items-center g-3">
+        <div class="col-12 col-md-6 text-center text-md-start">
+          <h2 class="h4 mb-0 fw-bold text-dark">Hotel Manager Panel</h2>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="d-flex align-items-center justify-content-md-end gap-2">
+            <label for="statusFilter" class="small fw-bold text-muted text-nowrap">Filter Status:</label>
+            <select id="statusFilter" class="form-select form-select-sm w-auto shadow-none" 
+                    [(ngModel)]="selectedStatus" (change)="filterOrders()">
+              <option value="All">All</option>
+              <option value="Pending">Pending</option>
+              <option value="Delivery in progress">Delivery in Progress</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Accepted">Accepted</option>
+              <option value="Cancelled With refund">Cancelled With refund</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 custom-manager-table">
+          <thead class="table-primary">
+            <tr>
+              <th class="ps-4">Order ID</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Countdown / ETA</th>
+              <th class="pe-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of Orders">
+              <td class="ps-4 fw-bold small text-muted" data-label="Order ID">{{ order._id }}</td>
+              <td data-label="Items">
+                <ul class="list-unstyled mb-0 small">
+                  <li *ngFor="let item of order.items" class="mb-1">
+                    <span class="fw-semibold">{{ item.itemId?.itemName || 'Deleted Item' }}</span>
+                    <span class="text-primary mx-1" *ngIf="item.quantity">[x{{ item.quantity }}]</span>
+                  </li>
+                </ul>
+              </td>
+              <td data-label="Total" class="fw-bold text-dark">{{ order.totalAmount }} Rs.</td>
+              <td data-label="Status">
+                <span class="badge rounded-pill" 
+                      [ngClass]="order.status === 'Delivery in progress' ? 'bg-primary' : 'bg-secondary bg-opacity-10 text-dark'">
+                  {{ order.status }}
+                </span>
+              </td>
+              <td data-label="Timer" class="font-monospace">
+                <div class="d-flex flex-column">
+                  <span class="badge bg-dark fw-normal">{{ displayTimers[order._id] || 'Calculating...' }}</span>
+                </div>
+              </td>
+              <td class="pe-4" data-label="Actions">
+                <div class="d-flex flex-column gap-2 py-2">
+                  <input
+                    type="datetime-local"
+                    class="form-control form-control-sm"
+                    [(ngModel)]="order.eta"
+                    [disabled]="['Pending', 'Delivery in progress', 'Delivered', 'Cancelled With refund'].includes(order.status)"
+                    [min]="todayDate + 'T00:00'"
+                    [max]="todayDate + 'T23:59'"
+                  />
+
+                  <button
+                    class="btn btn-success btn-sm fw-bold w-100"
+                    [disabled]="order.status === 'Delivery in progress' || order.status === 'Delivered' || order.status === 'Cancelled With refund' || !order.eta"
+                    (click)="handleSetDeliveryInProgress(order._id, order.eta || '', 'Delivery in progress')">
+                    Start Delivery
+                  </button>
+
+                  <div class="mt-2 border-top pt-2">
+                    <div *ngFor="let item of order.items" class="d-flex justify-content-between align-items-center mb-1 gap-2">
+                      <span class="small text-truncate" style="max-width: 80px;">{{ item.itemId?.itemName }}</span>
+                      <button
+                        *ngIf="order.status !== 'Cancelled With refund' && item.itemId"
+                        class="btn btn-outline-danger btn-xs"
+                        [disabled]="['Pending', 'Delivered', 'Cancelled With refund'].includes(order.status) || item.isProcessing"
+                        (click)="handleCancelOrder(order._id, item, 'Cancelled With refund')">
+                        <small>{{ item.isProcessing ? '...' : 'Refund' }}</small>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
- 
-  <table class="order-table">
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Items</th>
-        <th>Total</th>
-        <th>Status</th>
-        <th>Countdown / ETA</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of Orders">
-  <td>{{ order._id }}</td>
-  <td>
-    <ul>
-      <li *ngFor="let item of order.items">
-        {{ item.itemId?.itemName || 'Deleted Item' }} 
-        <small *ngIf="item.quantity"><br>Qunatity : {{ item.quantity }}</small>
-      </li>
-    </ul>
-  </td>
-  <td>{{ order.totalAmount }} Rs.</td>
-  <td [ngClass]="{'status-delivery': order.status === 'Delivery in progress'}">
-    {{ order.status }}
-  </td>
-
-  <td class="timer-display">
-    <strong>{{ displayTimers[order._id] || 'Calculating...' }}</strong>
-  </td>
-
-  <td>
-    <input
-      type="datetime-local"
-      [(ngModel)]="order.eta"
-      [disabled]="['Pending', 'Delivery in progress', 'Delivered', 'Cancelled With refund'].includes(order.status)"
-      [min]="todayDate + 'T00:00'"
-      [max]="todayDate + 'T23:59'"
-    />
-    
-    <button
-      class="action-btn start"
-      [disabled]="['Delivery in progress', 'Delivered', 'Cancelled With refund'].includes(order.status) || !order.eta"
-      (click)="handleSetDeliveryInProgress(order._id, order.eta || '', 'Delivery in progress')">
-        Start Delivery
-    </button>
-
-    <button
-      class="action-btn cancelled"
-      [disabled]="['Pending', 'Delivered', 'Cancelled With refund'].includes(order.status)"
-      (click)="handleCancelOrder(order._id,'Cancelled With refund')">
-        Cancel
-    </button>
-  </td>
-</tr>
-    </tbody>
-  </table>
 </div>
