@@ -1,41 +1,67 @@
-<div class="order-container">
-  <h2>My Orders</h2>
-  <table class="order-table" *ngIf="orderdItems && orderdItems.length > 0; else noOrders">
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Items</th>
-        <th>Total Price</th>
-        <th>Status</th>
-        <th>Agent-ID</th>
-        <th>Agent-Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orderdItems">
-        <td>{{ order._id }}</td>
-        <td>
-          <ul class="item-list">
-            <li *ngFor="let item of order.items">{{ item.itemId.itemName || 'N/A'}}</li>
-          </ul>
-        </td>
-        <td>{{ order.totalAmount }} Rs.</td>
-        <td>
-          <span class="status-badge" [ngClass]="order.status.toLowerCase()">
-            {{ order.status }}
-          </span>
-        </td>
-        <td>{{ order.agentAssigned ? order.agentAssigned._id : 'N/A' }}</td>
-        <td>{{ order.agentAssigned ? order.agentAssigned.agentName : 'N/A' }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<ng-template #noOrders>
-  <div class="no-orders-container">
-    <p class="no-orders-message">You have no orders placed yet.</p>
-    <i class="fa fa-shopping-cart no-orders-icon"></i>
+<div class="container py-5">
+  <div class="d-flex align-items-center mb-4 border-start border-primary border-5 ps-3">
+    <h2 class="h3 fw-bold mb-0">My Orders</h2>
   </div>
-</ng-template>
 
+  <div *ngIf="orderdItems && orderdItems.length > 0; else noOrders" class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0 responsive-order-table">
+        <thead class="bg-light">
+          <tr>
+            <th class="ps-4 py-3 text-uppercase small fw-bold text-muted">Order ID</th>
+            <th class="py-3 text-uppercase small fw-bold text-muted">Items</th>
+            <th class="py-3 text-uppercase small fw-bold text-muted">Total Price</th>
+            <th class="py-3 text-uppercase small fw-bold text-muted text-center">Status</th>
+            <th class="pe-4 py-3 text-uppercase small fw-bold text-muted">Delivery Agent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orderdItems">
+            <td class="ps-4 py-3 fw-bold text-muted small" data-label="Order ID">
+              #{{ order._id.slice(-6) }}
+            </td>
 
+            <td class="py-3" data-label="Items">
+              <div class="d-flex flex-wrap gap-1">
+                <span *ngFor="let item of order.items" class="badge bg-light text-dark border fw-medium px-2 py-1">
+                  {{ item.itemId?.itemName || 'N/A' }}
+                </span>
+              </div>
+            </td>
+
+            <td class="py-3 fw-bold" data-label="Total Price">
+              {{ order.totalAmount }} Rs.
+            </td>
+
+            <td class="py-3 text-md-center" data-label="Status">
+              <div class="d-inline-flex flex-column align-items-center">
+                <span class="badge rounded-pill px-3 py-2 status-badge-md shadow-sm" [ngClass]="order.status.toLowerCase().split(' ').join('-')">
+                  {{ order.status }}
+                </span>
+                <span *ngIf="order.refundedAmount" class="mt-1 small text-danger fw-bold">
+                   Refunded: {{ order.refundedAmount }}
+                </span>
+              </div>
+            </td>
+
+            <td class="pe-4 py-3 text-secondary small" data-label="Agent">
+              <div class="d-flex align-items-center gap-2">
+                <span class="fs-5">🛵</span>
+                <span>{{ order.agentAssigned ? order.agentAssigned.agentName : 'Assigning Agent...' }}</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #noOrders>
+    <div class="text-center py-5 px-3 bg-white rounded-4 shadow-sm border-2 border-dashed border-light mt-2">
+      <div class="display-1 text-muted opacity-25 mb-3">🛒</div>
+      <h3 class="h5 fw-bold text-dark">You have no orders placed yet.</h3>
+      <p class="text-secondary mb-4">Hungry? Discover the best foods near you!</p>
+      <a routerLink="/" class="btn btn-primary rounded-pill px-4 fw-bold">Order Something Now</a>
+    </div>
+  </ng-template>
+</div>
